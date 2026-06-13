@@ -24,7 +24,7 @@ ColumnLayout {
     readonly property bool isOccupied: occupied[ws] ?? false
     readonly property bool hasWindows: isOccupied && Config.bar.workspaces.showWindows
 
-    Layout.alignment: Qt.AlignHCenter
+    Layout.alignment: Qt.AlignVCenter
     Layout.preferredHeight: size
 
     spacing: 0

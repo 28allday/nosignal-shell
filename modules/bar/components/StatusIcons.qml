@@ -20,16 +20,13 @@ StyledRect {
     radius: Tokens.rounding.full
 
     clip: true
-    implicitWidth: Tokens.sizes.bar.innerWidth
-    implicitHeight: iconColumn.implicitHeight + Tokens.padding.medium * 2 - (Config.bar.status.showLockStatus && !Hypr.capsLock && !Hypr.numLock ? iconColumn.spacing : 0)
+    implicitHeight: Tokens.sizes.bar.innerWidth
+    implicitWidth: iconColumn.implicitWidth + Tokens.padding.medium * 2 - (Config.bar.status.showLockStatus && !Hypr.capsLock && !Hypr.numLock ? iconColumn.spacing : 0)
 
-    ColumnLayout {
+    RowLayout {
         id: iconColumn
 
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: Tokens.padding.medium
+        anchors.centerIn: parent
 
         spacing: Tokens.spacing.medium / 2
 
@@ -261,7 +258,7 @@ StyledRect {
         required property string name
 
         asynchronous: true
-        Layout.alignment: Qt.AlignHCenter
+        Layout.alignment: Qt.AlignVCenter
         visible: active
     }
 }
