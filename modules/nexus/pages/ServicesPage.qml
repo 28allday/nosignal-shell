@@ -211,6 +211,11 @@ PageBase {
             onToggled: GlobalConfig.services.smartScheme = checked
         }
 
+        // NoSignal: time-boxed passwordless sudo (15 min) toggle
+        SudoToggleRow {
+            Layout.fillWidth: true
+        }
+
         SelectRow {
             Layout.fillWidth: true
             last: true

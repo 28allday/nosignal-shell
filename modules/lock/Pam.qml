@@ -40,7 +40,12 @@ Scope {
     PamContext {
         id: passwd
 
-        config: "passwd"
+        // NoSignal: faillock-free lock auth (finding F1). The stock "passwd"
+        // service routes through pam_faillock, which can lock the user out of
+        // their OWN session after a few failed unlocks — refusing even the
+        // correct password until /run/faillock clears on reboot. The bundled
+        // "caelestia" service (assets/pam.d/caelestia) uses plain pam_unix.
+        config: "caelestia"
         configDirectory: Quickshell.shellDir + "/assets/pam.d"
 
         onMessageChanged: {

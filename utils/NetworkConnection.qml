@@ -70,7 +70,28 @@ QtObject {
             const hasSavedProfile = Nmcli.hasSavedProfile(network.ssid);
 
             if (hasSavedProfile) {
-                Nmcli.connectToNetwork(network.ssid, "", network.bssid, null);
+                // NoSignal wifi-password-retry: a saved profile can hold a wrong
+                // password. Stock code passed a null callback here, so a failed
+                // activation never re-prompted — the dialog never reopened. On
+                // auth failure: forget the bad profile and reopen the dialog
+                // (same cleanup + dialog path the no-saved-profile branch uses).
+                Nmcli.connectToNetwork(network.ssid, "", network.bssid, result => {
+                    if (result && result.needsPassword) {
+                        if (Nmcli.pendingConnection) {
+                            Nmcli.connectionCheckTimer.stop();
+                            Nmcli.immediateCheckTimer.stop();
+                            Nmcli.immediateCheckTimer.checkCount = 0;
+                            Nmcli.pendingConnection = null;
+                        }
+                        Nmcli.forgetNetwork(network.ssid);
+                        if (session && session.network) {
+                            session.network.showPasswordDialog = true;
+                            session.network.pendingNetwork = network;
+                        } else if (onPasswordNeeded) {
+                            onPasswordNeeded(network);
+                        }
+                    }
+                });
             } else {
                 // Use password check with callback
                 Nmcli.connectToNetworkWithPasswordCheck(network.ssid, network.isSecure, result => {

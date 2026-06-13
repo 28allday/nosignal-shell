@@ -73,10 +73,20 @@ QtObject {
 
         // System
         Component {
-            PlaceholderComp {}
+            // Updates (NoSignal)
+            StackPage {
+                Component {
+                    UpdatesPage {}
+                }
+            }
         },
         Component {
-            PlaceholderComp {}
+            // Additions (NoSignal)
+            StackPage {
+                Component {
+                    AdditionsPage {}
+                }
+            }
         },
 
         // Shell

@@ -50,9 +50,9 @@ QtObject {
             category: "system"
         },
         {
-            label: qsTr("Plugins"),
+            label: qsTr("Additions"),
             icon: "extension",
-            description: qsTr("Manage plugins"),
+            description: qsTr("Install optional software"),
             category: "system"
         },
 
