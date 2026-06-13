@@ -149,14 +149,14 @@ Item {
         }
     }
 
-    Behavior on implicitWidth {
+    Behavior on implicitHeight {
         Anim {
             duration: root.animLength
             easing: root.animCurve
         }
     }
 
-    Behavior on implicitHeight {
+    Behavior on implicitWidth {
         enabled: root.offsetScale < 1
 
         Anim {
