@@ -1,0 +1,51 @@
+# nosignal-shell — NoSignal's fork of the Caelestia desktop shell.
+#
+# Builds the Quickshell shell from 28allday/nosignal-shell (a fork of
+# caelestia-dots/shell, GPL-3.0). It installs to the SAME quickshell namespace
+# as upstream (/etc/xdg/quickshell/caelestia/), so caelestia-cli, the hypr binds
+# (caelestia:nexus etc.) and ~/.config/caelestia/ all keep working unchanged.
+# It `provides`/`conflicts` caelestia-shell so it satisfies caelestia-meta and
+# replaces the upstream package — and because it is NOT in any auto-update repo,
+# `pacman -Syu`/`yay` never overwrites NoSignal's layout. Updates are deliberate:
+# advance the `nosignal` branch + bump the pin in the NoSignal builder, rebuild.
+#
+# Maintainer: 28allday (NoSignal)
+# Upstream shell: Soramane <soramane32 at gmail dot com> (caelestia-dots/shell)
+
+_pkgname='nosignal-shell'
+pkgname="$_pkgname"
+pkgver=2.0.2
+pkgrel=1
+pkgdesc="NoSignal desktop shell (fork of caelestia-shell, layout under NoSignal control)"
+arch=('x86_64' 'aarch64')
+url='https://github.com/28allday/nosignal-shell'
+license=('GPL-3.0-only')
+depends=('caelestia-cli' 'quickshell-git' 'ddcutil' 'brightnessctl' 'app2unit' 'libcava' 'networkmanager'
+         'lm_sensors' 'fish' 'aubio' 'libpipewire' 'glibc' 'gcc-libs' 'ttf-material-symbols-variable' 'power-profiles-daemon'
+         'ttf-rubik-vf' 'ttf-cascadia-code-nerd' 'swappy' 'libqalculate' 'bash' 'qt6-base' 'qt6-declarative' 'qt6-imageformats')
+makedepends=('git' 'cmake' 'ninja' 'qt6-shadertools')
+# Replace + satisfy the upstream package (caelestia-meta depends on caelestia-shell).
+provides=('caelestia-shell')
+conflicts=('caelestia-shell')
+# The NoSignal builder pins this to a specific commit (sed-injects #commit=...),
+# mirroring how it pins quickshell-git — so ISO builds are reproducible.
+source=("$_pkgname::git+$url.git#branch=nosignal")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd "${srcdir}/${_pkgname}"
+    git describe --long --tags --abbrev=7 | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+    cd "${srcdir}/${_pkgname}"
+    cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+        -DCMAKE_INSTALL_PREFIX=/ -DDISTRIBUTOR="NoSignal (package: $_pkgname)"
+    cmake --build build
+}
+
+package() {
+    cd "${srcdir}/${_pkgname}"
+    DESTDIR="$pkgdir" cmake --install build
+    install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$_pkgname/LICENSE"
+}
