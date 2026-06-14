@@ -71,10 +71,10 @@ NsPanel {
                     border.width: cell.active ? 2 : 1
                     border.color: cell.active ? Theme.accent : Theme.panelBorder
 
-                    MaterialIcon {
+                    NsIcon {
                         anchors.centerIn: parent
                         visible: cell.occupied
-                        text: "web_asset"
+                        icon: "web_asset"
                         color: Theme.textFaint
                     }
 

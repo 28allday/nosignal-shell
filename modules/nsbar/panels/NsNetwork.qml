@@ -63,8 +63,8 @@ NsPanel {
                     anchors.rightMargin: 10
                     spacing: 10
 
-                    MaterialIcon {
-                        text: Icons.getNetworkIcon(row.modelData?.strength ?? 0)
+                    NsIcon {
+                        icon: Icons.getNetworkIcon(row.modelData?.strength ?? 0)
                         color: row.connected ? Theme.accent : Theme.text
                     }
 
@@ -89,9 +89,9 @@ NsPanel {
                         }
                     }
 
-                    MaterialIcon {
+                    NsIcon {
                         visible: row.modelData?.isSecure ?? false
-                        text: "lock"
+                        icon: "lock"
                         color: Theme.textFaint
                     }
                 }

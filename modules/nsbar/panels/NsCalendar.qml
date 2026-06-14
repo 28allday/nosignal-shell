@@ -157,9 +157,9 @@ NsPanel {
         radius: Theme.radius.button
         color: ma.containsMouse ? Theme.hover : "transparent"
 
-        MaterialIcon {
+        NsIcon {
             anchors.centerIn: parent
-            text: parent.icon
+            icon: parent.icon
             color: Theme.textMuted
         }
 

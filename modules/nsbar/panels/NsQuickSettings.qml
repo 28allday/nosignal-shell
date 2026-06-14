@@ -78,9 +78,9 @@ NsPanel {
             radius: 17
             color: pwrMa.containsMouse ? Theme.accentSoft : Theme.fillSubtle
 
-            MaterialIcon {
+            NsIcon {
                 anchors.centerIn: parent
-                text: "power_settings_new"
+                icon: "power_settings_new"
                 color: Theme.danger
             }
 
@@ -189,9 +189,9 @@ NsPanel {
                         color: Theme.blue
                     }
                 }
-                MaterialIcon {
+                NsIcon {
                     anchors.centerIn: parent
-                    text: "music_note"
+                    icon: "music_note"
                     color: Theme.onAccent
                 }
             }
@@ -267,9 +267,9 @@ NsPanel {
                 radius: 15
                 color: tile.on ? Theme.accent : Qt.rgba(1, 1, 1, 0.06)
 
-                MaterialIcon {
+                NsIcon {
                     anchors.centerIn: parent
-                    text: tile.icon
+                    icon: tile.icon
                     color: tile.on ? Theme.onAccent : Theme.text
                 }
             }
@@ -309,8 +309,8 @@ NsPanel {
         Layout.fillWidth: true
         spacing: 10
 
-        MaterialIcon {
-            text: s.icon
+        NsIcon {
+            icon: s.icon
             color: Theme.textMuted
         }
 
@@ -365,9 +365,9 @@ NsPanel {
         radius: 14
         color: mbm.containsMouse ? Theme.hover : "transparent"
 
-        MaterialIcon {
+        NsIcon {
             anchors.centerIn: parent
-            text: parent.icon
+            icon: parent.icon
             color: Theme.text
         }
 

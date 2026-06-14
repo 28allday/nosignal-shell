@@ -117,9 +117,9 @@ Item {
             anchors.centerIn: parent
             spacing: 10
 
-            MaterialIcon {
+            NsIcon {
                 Layout.alignment: Qt.AlignHCenter
-                text: tile.icon
+                icon: tile.icon
                 color: tile.danger ? Theme.danger : Theme.text
             }
 

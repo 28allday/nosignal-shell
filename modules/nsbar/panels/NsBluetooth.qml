@@ -72,9 +72,9 @@ NsPanel {
                         radius: 0
                         color: row.connected ? Theme.accentSoft : Theme.fillSubtle
 
-                        MaterialIcon {
+                        NsIcon {
                             anchors.centerIn: parent
-                            text: Icons.getBluetoothIcon(row.modelData?.icon ?? "")
+                            icon: Icons.getBluetoothIcon(row.modelData?.icon ?? "")
                             color: row.connected ? Theme.accent : Theme.text
                         }
                     }

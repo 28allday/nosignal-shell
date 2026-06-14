@@ -20,8 +20,8 @@ NsPanel {
         Layout.fillWidth: true
         spacing: 8
 
-        MaterialIcon {
-            text: "speaker"
+        NsIcon {
+            icon: "speaker"
             color: Theme.textMuted
         }
 
@@ -34,8 +34,8 @@ NsPanel {
             font.pixelSize: Theme.font.bodySmall
         }
 
-        MaterialIcon {
-            text: "expand_more"
+        NsIcon {
+            icon: "expand_more"
             color: Theme.textFaint
         }
     }
@@ -114,8 +114,8 @@ NsPanel {
             Layout.fillWidth: true
             spacing: 10
 
-            MaterialIcon {
-                text: s.icon
+            NsIcon {
+                icon: s.icon
                 color: Theme.textMuted
             }
 

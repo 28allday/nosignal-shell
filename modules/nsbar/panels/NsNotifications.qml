@@ -43,9 +43,9 @@ NsPanel {
             radius: 13
             color: Notifs.dnd ? Theme.accentSoft : dndMa.containsMouse ? Theme.hover : "transparent"
 
-            MaterialIcon {
+            NsIcon {
                 anchors.centerIn: parent
-                text: Notifs.dnd ? "do_not_disturb_on" : "dark_mode"
+                icon: Notifs.dnd ? "do_not_disturb_on" : "dark_mode"
                 color: Notifs.dnd ? Theme.accent : Theme.textMuted
             }
 
@@ -113,9 +113,9 @@ NsPanel {
                         radius: 0
                         color: Theme.accentSoft
 
-                        MaterialIcon {
+                        NsIcon {
                             anchors.centerIn: parent
-                            text: Icons.getNotifIcon(card.modelData?.summary ?? "", card.modelData?.urgency ?? 1)
+                            icon: Icons.getNotifIcon(card.modelData?.summary ?? "", card.modelData?.urgency ?? 1)
                             color: Theme.accent
                         }
                     }

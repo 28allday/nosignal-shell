@@ -80,8 +80,8 @@ Variants {
                 active: NsShell.open === "overview"
                 onTriggered: NsShell.toggle("overview", mapToItem(null, width / 2, 0).x)
 
-                MaterialIcon {
-                    text: "desktop_windows"
+                NsIcon {
+                    icon: "desktop_windows"
                     color: titlePill.active ? Theme.accent : Theme.textMuted
                 }
 
@@ -123,8 +123,8 @@ Variants {
                 active: NsShell.open === "quicksettings"
                 onTriggered: NsShell.toggle("quicksettings", mapToItem(null, width / 2, 0).x)
 
-                MaterialIcon {
-                    text: Players.active?.isPlaying ? "pause" : "music_note"
+                NsIcon {
+                    icon: Players.active?.isPlaying ? "pause" : "music_note"
                     color: mediaPill.active ? Theme.accent : Theme.green
                 }
 
@@ -152,8 +152,8 @@ Variants {
                 active: NsShell.open === "notifications"
                 onTriggered: NsShell.toggle("notifications", mapToItem(null, width / 2, 0).x)
 
-                MaterialIcon {
-                    text: Notifs.notClosed.length > 0 ? "notifications" : "notifications_none"
+                NsIcon {
+                    icon: Notifs.notClosed.length > 0 ? "notifications" : "notifications_none"
                     color: bellPill.active ? Theme.accent : Theme.text
 
                     Rectangle {
@@ -203,8 +203,8 @@ Variants {
                 active: NsShell.open === "quicksettings"
                 onTriggered: NsShell.toggle("quicksettings", mapToItem(null, width / 2, 0).x)
 
-                MaterialIcon {
-                    text: batteryPill.laptop ? Icons.getBatteryIcon(UPower.displayDevice.percentage, [UPowerDeviceState.Charging, UPowerDeviceState.FullyCharged, UPowerDeviceState.PendingCharge].includes(UPower.displayDevice.state)) : "tune"
+                NsIcon {
+                    icon: batteryPill.laptop ? Icons.getBatteryIcon(UPower.displayDevice.percentage, [UPowerDeviceState.Charging, UPowerDeviceState.FullyCharged, UPowerDeviceState.PendingCharge].includes(UPower.displayDevice.state)) : "tune"
                     color: batteryPill.active ? Theme.accent : !batteryPill.laptop || !UPower.onBattery || UPower.displayDevice.percentage > 0.2 ? Theme.text : Theme.danger
                     fill: 1
                 }
@@ -248,8 +248,8 @@ Variants {
             active: NsShell.open === panel
             onTriggered: NsShell.toggle(panel, mapToItem(null, width / 2, 0).x)
 
-            MaterialIcon {
-                text: p.icon
+            NsIcon {
+                icon: p.icon
                 color: p.active ? Theme.accent : p.iconColour
             }
         }
