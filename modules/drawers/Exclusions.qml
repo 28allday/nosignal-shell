@@ -18,7 +18,7 @@ Scope {
 
     ExclusionZone {
         anchors.top: true
-        exclusiveZone: root.bar.exclusiveZone
+        exclusiveZone: 0 // NoSignal: NsBar owns the top exclusive zone
     }
 
     ExclusionZone {
@@ -32,7 +32,7 @@ Scope {
     component ExclusionZone: StyledWindow {
         screen: root.screen
         name: "border-exclusion"
-        exclusiveZone: contentItem.Config.border.thickness
+        exclusiveZone: 0 // NoSignal: no screen-edge frame
         mask: Region {}
         implicitWidth: 1
         implicitHeight: 1

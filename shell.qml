@@ -6,6 +6,7 @@
 
 import "modules"
 import "modules/drawers"
+import "modules/nsbar"
 import "modules/background"
 import "modules/areapicker"
 import "modules/lock"
@@ -17,7 +18,9 @@ ShellRoot {
     GSFLoader {}
 
     Background {}
-    Drawers {}
+    Drawers {} // NoSignal: kept for launcher/OSD/lock; its bar is collapsed (see BarWrapper)
+    NsBar {} // NoSignal redesign: slim glass top bar
+    NsOverlay {} // NoSignal redesign: floating popout panels
     AreaPicker {}
     Lock {
         id: lock

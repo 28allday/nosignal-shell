@@ -7,9 +7,10 @@ StyledRect {
     property bool first
     property bool last
 
-    color: Colours.tPalette.m3surfaceContainer
-    topLeftRadius: first ? Tokens.rounding.extraLarge : Tokens.rounding.extraSmall
-    topRightRadius: first ? Tokens.rounding.extraLarge : Tokens.rounding.extraSmall
-    bottomLeftRadius: last ? Tokens.rounding.extraLarge : Tokens.rounding.extraSmall
-    bottomRightRadius: last ? Tokens.rounding.extraLarge : Tokens.rounding.extraSmall
+    // NoSignal: dark-glass cards, 4px outer corners (connected-list look)
+    color: Theme.fillSubtle
+    topLeftRadius: first ? Theme.radius.panel : 0
+    topRightRadius: first ? Theme.radius.panel : 0
+    bottomLeftRadius: last ? Theme.radius.panel : 0
+    bottomRightRadius: last ? Theme.radius.panel : 0
 }

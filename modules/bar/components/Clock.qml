@@ -1,113 +1,34 @@
 pragma ComponentBehavior: Bound
 
+// NoSignal redesign: center clock module — date (muted) + time (DemiBold),
+// JetBrains Mono. The hover/active pill is applied by the bar module wrapper;
+// this is just the content. Opens the Calendar popout.
+
 import QtQuick
 import QtQuick.Layouts
-import Caelestia.Config
 import qs.components
 import qs.services
 
-StyledRect {
+RowLayout {
     id: root
 
-    readonly property color colour: Colours.palette.m3tertiary
-    readonly property int padding: Config.bar.clock.background ? Tokens.padding.medium : Tokens.padding.extraSmall
-    readonly property var font: Tokens.font.body.builders.small.scale(1.1)
+    spacing: 8
 
-    implicitHeight: Tokens.sizes.bar.innerWidth
-    implicitWidth: layout.implicitWidth + root.padding * 2
+    StyledText {
+        Layout.alignment: Qt.AlignVCenter
+        text: Time.format("ddd d MMM")
+        color: Theme.textMuted
+        font.family: Theme.font.family
+        font.pixelSize: Theme.font.bar
+        font.weight: Font.Normal
+    }
 
-    color: Qt.alpha(Colours.tPalette.m3surfaceContainer, Config.bar.clock.background ? Colours.tPalette.m3surfaceContainer.a : 0)
-    radius: Tokens.rounding.full
-
-    RowLayout {
-        id: layout
-
-        anchors.centerIn: parent
-        spacing: Tokens.spacing.small
-
-        Loader {
-            Layout.alignment: Qt.AlignVCenter
-            asynchronous: true
-            active: Config.bar.clock.showIcon
-            visible: active
-
-            sourceComponent: MaterialIcon {
-                text: "calendar_month"
-                color: root.colour
-            }
-        }
-
-        StyledText {
-            Layout.alignment: Qt.AlignVCenter
-            visible: Config.bar.clock.showDate
-
-            horizontalAlignment: StyledText.AlignHCenter
-            text: Time.format("ddd d")
-            font: Tokens.font.body.small
-            color: root.colour
-        }
-
-        Rectangle {
-            Layout.fillHeight: true
-            Layout.topMargin: root.padding
-            Layout.bottomMargin: root.padding
-            visible: Config.bar.clock.showDate
-            implicitWidth: 1
-            color: Colours.palette.m3outlineVariant
-        }
-
-        StyledText {
-            Layout.alignment: Qt.AlignVCenter
-            text: Time.hourStr
-            font: {
-                const scale = text === "11" ? 1.15 : Math.min(1.05, Math.max(hourMetrics.width, minMetrics.width) / hourMetrics.width);
-                return root.font.width(scale * 100).letterSpacing(scale).build();
-            }
-            color: root.colour
-
-            TextMetrics {
-                id: hourMetrics
-
-                font: root.font.build()
-                text: Time.hourStr
-            }
-        }
-
-        StyledText {
-            Layout.alignment: Qt.AlignVCenter
-            text: ":"
-            font: root.font.build()
-            color: root.colour
-        }
-
-        StyledText {
-            Layout.alignment: Qt.AlignVCenter
-            text: Time.minuteStr
-            font: {
-                const scale = text === "11" ? 1.15 : Math.min(1.05, Math.max(hourMetrics.width, minMetrics.width) / minMetrics.width);
-                return root.font.width(scale * 100).letterSpacing(scale).build();
-            }
-            color: root.colour
-
-            TextMetrics {
-                id: minMetrics
-
-                font: root.font.build()
-                text: Time.minuteStr
-            }
-        }
-
-        Loader {
-            Layout.alignment: Qt.AlignVCenter
-            asynchronous: true
-            active: GlobalConfig.services.useTwelveHourClock
-            visible: active
-
-            sourceComponent: StyledText {
-                text: Time.amPmStr.toLowerCase()
-                font: Tokens.font.body.builders.small.scale(0.9).build()
-                color: root.colour
-            }
-        }
+    StyledText {
+        Layout.alignment: Qt.AlignVCenter
+        text: Time.format("hh:mm")
+        color: Theme.text
+        font.family: Theme.font.family
+        font.pixelSize: Theme.font.bar
+        font.weight: Font.DemiBold
     }
 }

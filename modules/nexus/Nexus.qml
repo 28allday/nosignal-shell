@@ -16,7 +16,7 @@ Item {
 
         onClose: root.close()
     }
-    property color blobColour: Colours.tPalette.m3surfaceContainerLow
+    property color blobColour: Theme.panelBg // NoSignal: fixed dark-glass window surface
 
     signal close
 
@@ -30,7 +30,7 @@ Item {
     BlobGroup {
         id: blobGroup
 
-        smoothing: root.Tokens.rounding.medium
+        smoothing: 0 // NoSignal: crisp corners (no organic blob smoothing)
         color: root.blobColour
     }
 
@@ -38,7 +38,7 @@ Item {
         anchors.fill: parent
         group: blobGroup
         opacity: root.blobColour.a
-        radius: Tokens.rounding.large
+        radius: Theme.radius.panel // NoSignal: sharp 4px corners
 
         borderLeft: navPane.width + navPane.anchors.margins * 2
         borderRight: Tokens.padding.medium

@@ -24,7 +24,9 @@ Item {
     readonly property int padding: Math.max(Tokens.padding.small, Config.border.thickness)
     readonly property int contentHeight: Tokens.sizes.bar.innerWidth + padding * 2
     readonly property int exclusiveZone: !disabled && (Config.bar.persistent || visibilities.bar) ? contentHeight : Config.border.thickness
-    readonly property bool shouldBeVisible: !fullscreen && !disabled && (Config.bar.persistent || visibilities.bar || isHovered)
+    // NoSignal redesign: the old caelestia bar is replaced by the slim NsBar
+    // PanelWindow. Collapse it (the drawer engine is kept for launcher/OSD/lock).
+    readonly property bool shouldBeVisible: false
     property bool isHovered
 
     function closeTray(): void {
