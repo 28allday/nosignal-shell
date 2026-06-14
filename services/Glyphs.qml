@@ -197,7 +197,10 @@ Singleton {
         "update": root.cp(0xf021),
         "wallpaper": root.cp(0xf03e),
         "workspaces": root.cp(0xf009),
-        "dock": root.cp(0xf2d1)
+        "dock": root.cp(0xf2d1),
+        // lock screen
+        "login": root.cp(0xf090),
+        "key": root.cp(0xf084)
     }
 
     function get(name: string): string {

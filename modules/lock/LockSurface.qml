@@ -1,11 +1,22 @@
 pragma ComponentBehavior: Bound
 
+// NoSignal lock screen surface (interface redesign 2026-06-14).
+// Secure ext-session-lock content: blurred wallpaper + scrim, top status row,
+// centred clock/date/avatar/username/password, bottom now-playing strip.
+// Reuses caelestia's Pam (buffer + handleKey + state) for PAM auth and the
+// WlSessionLock unlock signal — input is fed to pam.handleKey, never compared
+// in QML. JetBrains Mono / Nerd Font / NoSignal Theme tokens.
+
 import QtQuick
+import QtQuick.Layouts
 import QtQuick.Effects
 import Quickshell.Wayland
+import Quickshell.Bluetooth
+import Quickshell.Services.UPower
 import Caelestia.Config
 import qs.components
 import qs.services
+import qs.utils
 
 WlSessionLockSurface {
     id: root
@@ -13,7 +24,7 @@ WlSessionLockSurface {
     required property WlSessionLock lock
     required property Pam pam
 
-    readonly property alias unlocking: unlockAnim.running
+    readonly property bool errored: root.pam.state === "error" || root.pam.state === "fail"
 
     contentItem.Config.screen: screen.name
     contentItem.Tokens.screen: screen.name
@@ -22,144 +33,17 @@ WlSessionLockSurface {
 
     Connections {
         function onUnlock(): void {
-            unlockAnim.start();
+            root.lock.locked = false;
         }
-
         target: root.lock
     }
 
-    SequentialAnimation {
-        id: unlockAnim
-
-        ParallelAnimation {
-            Anim {
-                target: lockContent
-                properties: "implicitWidth,implicitHeight"
-                to: lockContent.size
-            }
-            Anim {
-                target: lockBg
-                property: "radius"
-                to: lockContent.radius
-            }
-            Anim {
-                target: content
-                property: "scale"
-                to: 0
-            }
-            Anim {
-                target: content
-                property: "opacity"
-                to: 0
-                type: Anim.StandardSmall
-            }
-            Anim {
-                target: lockIcon
-                property: "opacity"
-                to: 1
-                type: Anim.StandardLarge
-            }
-            Anim {
-                target: background
-                property: "opacity"
-                to: 0
-                type: Anim.StandardLarge
-            }
-            SequentialAnimation {
-                PauseAnimation {
-                    duration: Tokens.anim.durations.small
-                }
-                Anim {
-                    type: Anim.Standard
-                    target: lockContent
-                    property: "opacity"
-                    to: 0
-                }
-            }
-        }
-        PropertyAction {
-            target: root.lock
-            property: "locked"
-            value: false
-        }
-    }
-
-    ParallelAnimation {
-        id: initAnim
-
-        running: true
-
-        Anim {
-            target: background
-            property: "opacity"
-            to: 1
-            type: Anim.StandardLarge
-        }
-        SequentialAnimation {
-            ParallelAnimation {
-                Anim {
-                    target: lockContent
-                    property: "scale"
-                    to: 1
-                    type: Anim.FastSpatial
-                }
-                Anim {
-                    target: lockContent
-                    property: "rotation"
-                    to: 360
-                    duration: Tokens.anim.durations.expressiveFastSpatial
-                    easing: Tokens.anim.standardAccel
-                }
-            }
-            ParallelAnimation {
-                Anim {
-                    target: lockIcon
-                    property: "rotation"
-                    to: 360
-                    easing: Tokens.anim.standardDecel
-                }
-                Anim {
-                    type: Anim.DefaultEffects
-                    target: lockIcon
-                    property: "opacity"
-                    to: 0
-                }
-                Anim {
-                    type: Anim.DefaultEffects
-                    target: content
-                    property: "opacity"
-                    to: 1
-                }
-                Anim {
-                    target: content
-                    property: "scale"
-                    to: 1
-                }
-                Anim {
-                    target: lockBg
-                    property: "radius"
-                    to: lockContent.Tokens.rounding.extraLarge * 1.5
-                }
-                Anim {
-                    target: lockContent
-                    property: "implicitWidth"
-                    to: (root.screen?.height ?? 0) * lockContent.Tokens.sizes.lock.heightMult * lockContent.Tokens.sizes.lock.ratio
-                }
-                Anim {
-                    target: lockContent
-                    property: "implicitHeight"
-                    to: (root.screen?.height ?? 0) * lockContent.Tokens.sizes.lock.heightMult
-                }
-            }
-        }
-    }
-
+    // ── Blurred wallpaper + scrim ──────────────────────────────────────────
     ScreencopyView {
         id: background
 
         anchors.fill: parent
         captureSource: root.screen
-        opacity: 0
 
         layer.enabled: true
         layer.effect: MultiEffect {
@@ -168,57 +52,265 @@ WlSessionLockSurface {
             blur: 1
             blurMax: 64
             blurMultiplier: 1
+            brightness: -0.38
+            saturation: 0.1
         }
     }
 
+    Rectangle {
+        anchors.fill: parent
+        color: Qt.rgba(8 / 255, 10 / 255, 14 / 255, 0.5)
+    }
+
+    // ── Keyboard capture (feed PAM; Escape does nothing) ───────────────────
     Item {
-        id: lockContent
+        anchors.fill: parent
+        focus: true
+        Component.onCompleted: forceActiveFocus()
+        Keys.onPressed: event => root.pam.handleKey(event)
+    }
 
-        readonly property int size: lockIcon.implicitHeight + Tokens.padding.large * 4
-        readonly property int radius: size / 4 * Tokens.rounding.scale
+    // ── Top status row ─────────────────────────────────────────────────────
+    RowLayout {
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.topMargin: 22
+        anchors.leftMargin: 28
+        anchors.rightMargin: 28
 
-        anchors.centerIn: parent
-        implicitWidth: size
-        implicitHeight: size
-
-        rotation: 180
-        scale: 0
-
-        StyledRect {
-            id: lockBg
-
-            anchors.fill: parent
-            color: Colours.palette.m3surface
-            radius: parent.radius
-            opacity: Colours.transparency.enabled ? Colours.transparency.base : 1
-
-            layer.enabled: true
-            layer.effect: MultiEffect {
-                shadowEnabled: true
-                blurMax: 15
-                shadowColor: Qt.alpha(Colours.palette.m3shadow, 0.7)
+        RowLayout {
+            spacing: 7
+            NsIcon {
+                icon: "lock"
+                color: Theme.textMuted
+                size: 15
+            }
+            StyledText {
+                text: "Locked"
+                color: Theme.textMuted
+                font.family: Theme.font.family
+                font.pixelSize: Theme.font.bar
             }
         }
 
-        MaterialIcon {
-            id: lockIcon
-
-            anchors.centerIn: parent
-            text: "lock"
-            fontStyle: Tokens.font.icon.builders.extraLarge.scale(4).weight(Font.Bold).build()
-            rotation: 180
+        Item {
+            Layout.fillWidth: true
         }
 
-        Content {
-            id: content
+        RowLayout {
+            spacing: 14
 
-            anchors.centerIn: parent
-            width: (root.screen?.height ?? 0) * Tokens.sizes.lock.heightMult * Tokens.sizes.lock.ratio - Tokens.padding.extraLargeIncreased
-            height: (root.screen?.height ?? 0) * Tokens.sizes.lock.heightMult - Tokens.padding.extraLargeIncreased
+            NsIcon {
+                icon: Nmcli.active ? Icons.getNetworkIcon(Nmcli.active.strength ?? 0) : "wifi_off"
+                color: Theme.textMuted
+                size: 15
+            }
+            NsIcon {
+                icon: Bluetooth.defaultAdapter?.enabled ? "bluetooth_connected" : "bluetooth_disabled"
+                color: Theme.textMuted
+                size: 15
+            }
+            RowLayout {
+                spacing: 6
+                visible: UPower.displayDevice.isLaptopBattery
+                NsIcon {
+                    icon: Icons.getBatteryIcon(UPower.displayDevice.percentage, [UPowerDeviceState.Charging, UPowerDeviceState.FullyCharged].includes(UPower.displayDevice.state))
+                    color: Theme.textMuted
+                    size: 15
+                }
+                StyledText {
+                    text: Math.round(UPower.displayDevice.percentage * 100) + "%"
+                    color: Theme.textMuted
+                    font.family: Theme.font.family
+                    font.pixelSize: Theme.font.bar
+                }
+            }
+        }
+    }
 
-            lock: root
-            opacity: 0
-            scale: 0
+    // ── Centre block ───────────────────────────────────────────────────────
+    ColumnLayout {
+        anchors.centerIn: parent
+        spacing: 0
+
+        StyledText {
+            Layout.alignment: Qt.AlignHCenter
+            text: Time.format("hh:mm")
+            color: Theme.text
+            font.family: Theme.font.family
+            font.pixelSize: 108
+            font.weight: Font.ExtraLight
+            font.letterSpacing: 3
+        }
+
+        StyledText {
+            Layout.alignment: Qt.AlignHCenter
+            text: Time.format("ddd, d MMMM yyyy")
+            color: Theme.textMuted
+            font.family: Theme.font.family
+            font.pixelSize: 15
+        }
+
+        Rectangle {
+            Layout.alignment: Qt.AlignHCenter
+            Layout.topMargin: 64
+            implicitWidth: 74
+            implicitHeight: 74
+            radius: 37
+            gradient: Gradient {
+                orientation: Gradient.Vertical
+                GradientStop {
+                    position: 0
+                    color: Theme.accent
+                }
+                GradientStop {
+                    position: 1
+                    color: Theme.blue
+                }
+            }
+            NsIcon {
+                anchors.centerIn: parent
+                icon: "person"
+                color: Theme.onAccent
+                size: 34
+            }
+        }
+
+        StyledText {
+            Layout.alignment: Qt.AlignHCenter
+            Layout.topMargin: 14
+            text: SysInfo.user || "user"
+            color: Theme.text
+            font.family: Theme.font.family
+            font.pixelSize: 14
+        }
+
+        Rectangle {
+            Layout.alignment: Qt.AlignHCenter
+            Layout.topMargin: 16
+            implicitWidth: 312
+            implicitHeight: 44
+            radius: Theme.radius.panel
+            color: Qt.rgba(17 / 255, 20 / 255, 26 / 255, 0.55)
+            border.width: 1
+            border.color: root.errored ? Qt.rgba(224 / 255, 116 / 255, 106 / 255, 0.6) : Qt.rgba(1, 1, 1, 0.1)
+
+            RowLayout {
+                anchors.fill: parent
+                anchors.leftMargin: 14
+                anchors.rightMargin: 12
+                spacing: 10
+
+                NsIcon {
+                    icon: "key"
+                    color: Theme.textMuted
+                    size: 15
+                }
+
+                StyledText {
+                    Layout.fillWidth: true
+                    text: root.pam.buffer.length > 0 ? "•".repeat(root.pam.buffer.length) : "Enter password"
+                    color: root.pam.buffer.length > 0 ? Theme.text : Theme.textFaint
+                    elide: Text.ElideRight
+                    font.family: Theme.font.family
+                    font.pixelSize: Theme.font.body
+                    font.letterSpacing: root.pam.buffer.length > 0 ? 2 : 0
+                }
+
+                NsIcon {
+                    icon: "login"
+                    color: root.pam.buffer.length > 0 ? Theme.accent : Theme.textFaint
+                    size: 16
+
+                    MouseArea {
+                        anchors.fill: parent
+                        anchors.margins: -6
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: if (root.pam.buffer.length > 0)
+                            root.pam.passwd.start()
+                    }
+                }
+            }
+        }
+
+        StyledText {
+            Layout.alignment: Qt.AlignHCenter
+            Layout.topMargin: 8
+            Layout.preferredHeight: 14
+            text: root.errored ? "Incorrect — try again" : (root.pam.lockMessage || "")
+            color: Theme.danger
+            font.family: Theme.font.family
+            font.pixelSize: 12
+        }
+    }
+
+    // ── Bottom strip ───────────────────────────────────────────────────────
+    RowLayout {
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottomMargin: 26
+        anchors.leftMargin: 28
+        anchors.rightMargin: 28
+
+        RowLayout {
+            spacing: 10
+            visible: Players.active !== null
+
+            Rectangle {
+                implicitWidth: 42
+                implicitHeight: 42
+                radius: Theme.radius.panel
+                gradient: Gradient {
+                    orientation: Gradient.Vertical
+                    GradientStop {
+                        position: 0
+                        color: Theme.accent
+                    }
+                    GradientStop {
+                        position: 1
+                        color: Theme.blue
+                    }
+                }
+                NsIcon {
+                    anchors.centerIn: parent
+                    icon: "music_note"
+                    color: Theme.onAccent
+                    size: 18
+                }
+            }
+
+            ColumnLayout {
+                spacing: 0
+                StyledText {
+                    text: Players.active?.trackTitle || ""
+                    color: Theme.text
+                    elide: Text.ElideRight
+                    Layout.maximumWidth: 280
+                    font.family: Theme.font.family
+                    font.pixelSize: Theme.font.bodySmall
+                }
+                StyledText {
+                    text: Players.active?.trackArtist || ""
+                    color: Theme.textMuted
+                    elide: Text.ElideRight
+                    Layout.maximumWidth: 280
+                    font.family: Theme.font.family
+                    font.pixelSize: Theme.font.meta
+                }
+            }
+        }
+
+        Item {
+            Layout.fillWidth: true
+        }
+
+        StyledText {
+            text: "Press Enter to unlock"
+            color: Theme.textFaint
+            font.family: Theme.font.family
+            font.pixelSize: 11
         }
     }
 }
