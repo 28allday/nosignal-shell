@@ -37,11 +37,11 @@ ConnectedRect {
         sourceComponent: ColumnLayout {
             spacing: Tokens.spacing.extraSmall
 
-            MaterialIcon {
+            NsIcon {
                 Layout.alignment: Qt.AlignHCenter
-                text: root.placeholderIcon
+                icon: root.placeholderIcon
                 color: Colours.palette.m3outline
-                font: Tokens.font.icon.large
+                fontStyle: Tokens.font.icon.large
                 animate: true
             }
 

@@ -97,9 +97,9 @@ PageBase {
                 anchors.rightMargin: Tokens.padding.largeIncreased
                 spacing: Tokens.spacing.medium
 
-                MaterialIcon {
-                    text: "tune"
-                    font: Tokens.font.icon.medium
+                NsIcon {
+                    icon: "tune"
+                    fontStyle: Tokens.font.icon.medium
                 }
 
                 ColumnLayout {
@@ -123,10 +123,10 @@ PageBase {
                     }
                 }
 
-                MaterialIcon {
-                    text: "chevron_right"
+                NsIcon {
+                    icon: "chevron_right"
                     color: Colours.palette.m3onSurfaceVariant
-                    font: Tokens.font.icon.medium
+                    fontStyle: Tokens.font.icon.medium
                 }
             }
         }

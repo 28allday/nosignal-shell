@@ -93,13 +93,13 @@ PageBase {
                         radius: Tokens.rounding.full
                         color: device.connected ? Colours.palette.m3primary : Colours.palette.m3secondaryContainer
 
-                        MaterialIcon {
+                        NsIcon {
                             id: deviceIcon
 
                             anchors.centerIn: parent
-                            text: Icons.getBluetoothIcon(device.modelData?.icon ?? "")
+                            icon: Icons.getBluetoothIcon(device.modelData?.icon ?? "")
                             color: device.connected ? Colours.palette.m3onPrimary : Colours.palette.m3onSecondaryContainer
-                            font: Tokens.font.icon.medium
+                            fontStyle: Tokens.font.icon.medium
                             fill: device.connected ? 1 : 0
                             opacity: device.textOpacity
 
@@ -193,9 +193,9 @@ PageBase {
                     Anim {}
                 }
 
-                MaterialIcon {
-                    text: "add"
-                    font: Tokens.font.icon.medium
+                NsIcon {
+                    icon: "add"
+                    fontStyle: Tokens.font.icon.medium
                 }
 
                 StyledText {

@@ -106,11 +106,11 @@ PageBase {
                 width: parent.width - Tokens.padding.largeIncreased * 2
                 spacing: Tokens.padding.extraSmall
 
-                MaterialIcon {
+                NsIcon {
                     Layout.alignment: Qt.AlignHCenter
-                    text: "map"
+                    icon: "map"
                     color: Colours.palette.m3outlineVariant
-                    font: Tokens.font.icon.extraLarge
+                    fontStyle: Tokens.font.icon.extraLarge
                 }
 
                 StyledText {

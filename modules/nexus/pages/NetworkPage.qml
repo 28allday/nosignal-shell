@@ -131,10 +131,10 @@ PageBase {
                     anchors.rightMargin: Tokens.padding.extraLarge
                     spacing: Tokens.spacing.medium
 
-                    MaterialIcon {
-                        text: Icons.getNetworkIcon(network.modelData.strength)
+                    NsIcon {
+                        icon: Icons.getNetworkIcon(network.modelData.strength)
                         color: network.modelData.active ? Colours.palette.m3primary : Colours.palette.m3onSurfaceVariant
-                        font: Tokens.font.icon.medium
+                        fontStyle: Tokens.font.icon.medium
                         opacity: network.textOpacity
                     }
 
@@ -165,10 +165,10 @@ PageBase {
                         Component {
                             id: iconComp
 
-                            MaterialIcon {
-                                text: network.modelData.active ? "settings" : "lock"
+                            NsIcon {
+                                icon: network.modelData.active ? "settings" : "lock"
                                 color: network.modelData.active ? Colours.palette.m3primary : Colours.palette.m3onSurfaceVariant
-                                font: Tokens.font.icon.medium
+                                fontStyle: Tokens.font.icon.medium
                                 opacity: network.textOpacity
                             }
                         }
@@ -218,9 +218,9 @@ PageBase {
 
                 spacing: Tokens.spacing.medium
 
-                MaterialIcon {
-                    text: "add"
-                    font: Tokens.font.icon.medium
+                NsIcon {
+                    icon: "add"
+                    fontStyle: Tokens.font.icon.medium
                 }
 
                 StyledText {

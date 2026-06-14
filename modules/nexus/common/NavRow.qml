@@ -10,7 +10,7 @@ import qs.modules.nexus.common
 ConnectedRect {
     id: root
 
-    property alias icon: icon.text
+    property alias icon: icon.icon
     property alias label: label.text
     property alias status: status.text
 
@@ -32,11 +32,11 @@ ConnectedRect {
         anchors.rightMargin: Tokens.padding.largeIncreased
         spacing: Tokens.spacing.medium
 
-        MaterialIcon {
+        NsIcon {
             id: icon
 
             color: Colours.palette.m3onSurfaceVariant
-            font: Tokens.font.icon.medium
+            fontStyle: Tokens.font.icon.medium
         }
 
         ColumnLayout {
@@ -63,10 +63,10 @@ ConnectedRect {
             }
         }
 
-        MaterialIcon {
-            text: "chevron_right"
+        NsIcon {
+            icon: "chevron_right"
             color: Colours.palette.m3onSurfaceVariant
-            font: Tokens.font.icon.medium
+            fontStyle: Tokens.font.icon.medium
         }
     }
 }

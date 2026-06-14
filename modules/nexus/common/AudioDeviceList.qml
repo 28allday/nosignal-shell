@@ -58,13 +58,13 @@ ItemList {
                 radius: Tokens.rounding.full
                 color: device.active ? Colours.palette.m3primary : Colours.palette.m3secondaryContainer
 
-                MaterialIcon {
+                NsIcon {
                     id: devIcon
 
                     anchors.centerIn: parent
-                    text: root.iconName
+                    icon: root.iconName
                     color: device.active ? Colours.palette.m3onPrimary : Colours.palette.m3onSecondaryContainer
-                    font: Tokens.font.icon.medium
+                    fontStyle: Tokens.font.icon.medium
                     fill: device.active ? 1 : 0
 
                     Behavior on fill {
@@ -80,10 +80,10 @@ ItemList {
                 elide: Text.ElideRight
             }
 
-            MaterialIcon {
-                text: "check"
+            NsIcon {
+                icon: "check"
                 color: Colours.palette.m3primary
-                font: Tokens.font.icon.medium
+                fontStyle: Tokens.font.icon.medium
                 opacity: device.active ? 1 : 0
 
                 Behavior on opacity {

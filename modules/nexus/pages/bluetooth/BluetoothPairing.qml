@@ -125,10 +125,10 @@ PageBase {
                     anchors.rightMargin: Tokens.padding.largeIncreased
                     spacing: Tokens.spacing.medium
 
-                    MaterialIcon {
-                        text: Icons.getBluetoothIcon(newDevice.modelData?.icon ?? "")
+                    NsIcon {
+                        icon: Icons.getBluetoothIcon(newDevice.modelData?.icon ?? "")
                         color: Colours.palette.m3onSurfaceVariant
-                        font: Tokens.font.icon.medium
+                        fontStyle: Tokens.font.icon.medium
                         opacity: newDevice.textOpacity
                     }
 

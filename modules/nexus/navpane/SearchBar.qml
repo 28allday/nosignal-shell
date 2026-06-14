@@ -37,8 +37,8 @@ StyledRect {
 
         spacing: Tokens.spacing.small
 
-        MaterialIcon {
-            text: "search"
+        NsIcon {
+            icon: "search"
             color: Colours.palette.m3onSurfaceVariant
             fontStyle: Tokens.font.icon.medium
         }

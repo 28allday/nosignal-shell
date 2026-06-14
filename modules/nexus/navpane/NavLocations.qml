@@ -86,11 +86,11 @@ VerticalFadeFlickable {
                         radius: Tokens.rounding.full
                         color: item.isCurrentPage ? Colours.palette.m3primary : Colours.palette.m3secondaryContainer
 
-                        MaterialIcon {
+                        NsIcon {
                             anchors.centerIn: parent
                             anchors.verticalCenterOffset: 1
 
-                            text: item.modelData.icon
+                            icon: item.modelData.icon
                             color: item.isCurrentPage ? Colours.palette.m3onPrimary : Colours.palette.m3onSecondaryContainer
                             fontStyle: Tokens.font.icon.builders.medium.weight(Font.Medium).build()
                             grade: 25

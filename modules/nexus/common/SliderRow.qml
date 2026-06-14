@@ -11,7 +11,7 @@ import qs.modules.nexus.common
 ConnectedRect {
     id: root
 
-    property alias icon: icon.text
+    property alias icon: icon.icon
     property alias label: label.text
     property alias valueLabel: valueLabel.text
     property real value
@@ -28,11 +28,11 @@ ConnectedRect {
         anchors.topMargin: Tokens.padding.large
         spacing: Tokens.spacing.medium
 
-        MaterialIcon {
+        NsIcon {
             id: icon
 
             color: Colours.palette.m3onSurfaceVariant
-            font: Tokens.font.icon.medium
+            fontStyle: Tokens.font.icon.medium
         }
 
         ColumnLayout {

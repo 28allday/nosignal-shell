@@ -12,7 +12,12 @@ Text {
 
     property string icon: ""
     property int size: 16
-    property real fill: 0 // API parity with MaterialIcon (unused for Nerd Font)
+    // MaterialIcon API parity so NsIcon is a drop-in (these are no-ops here —
+    // Nerd Font has no fill/grade variable axes; sizing comes from fontStyle).
+    property real fill: 0
+    property int grade: 0
+    property bool animate: false
+    property var fontStyle: null
 
     renderType: Text.NativeRendering
     textFormat: Text.PlainText
@@ -20,7 +25,7 @@ Text {
     // "Mono" variant centers each icon glyph in a fixed cell (the plain NF
     // variant uses a wide advance, which left/right-shifts centered icons).
     font.family: "JetBrainsMono Nerd Font Mono"
-    font.pixelSize: root.size
+    font.pixelSize: root.fontStyle ? (root.fontStyle.pixelSize > 0 ? root.fontStyle.pixelSize : Math.round((root.fontStyle.pointSize || 12) * 1.33)) : root.size
     color: Theme.text
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter

@@ -72,11 +72,11 @@ PageBase {
                     anchors.centerIn: parent
                     spacing: 0
 
-                    MaterialIcon {
+                    NsIcon {
                         Layout.alignment: Qt.AlignHCenter
-                        text: "delete"
+                        icon: "delete"
                         color: forgetBtn.onColour
-                        font: Tokens.font.icon.medium
+                        fontStyle: Tokens.font.icon.medium
                     }
 
                     StyledText {
@@ -126,11 +126,11 @@ PageBase {
                     ColumnLayout {
                         spacing: 0
 
-                        MaterialIcon {
+                        NsIcon {
                             Layout.alignment: Qt.AlignHCenter
-                            text: root.connected ? "close" : "add"
+                            icon: root.connected ? "close" : "add"
                             color: connectBtn.inactiveOnColour
-                            font: Tokens.font.icon.medium
+                            fontStyle: Tokens.font.icon.medium
                             animate: true
                         }
 

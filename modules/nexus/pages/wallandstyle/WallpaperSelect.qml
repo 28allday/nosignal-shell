@@ -168,9 +168,9 @@ PageBase {
                     anchors.centerIn: parent
                     spacing: Tokens.spacing.extraSmall
 
-                    MaterialIcon {
+                    NsIcon {
                         Layout.alignment: Qt.AlignHCenter
-                        text: "hide_image"
+                        icon: "hide_image"
                         color: Colours.palette.m3outline
                         fontStyle: Tokens.font.icon.extraLarge
                     }
