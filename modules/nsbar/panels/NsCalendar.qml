@@ -109,7 +109,7 @@ NsPanel {
                     visible: parent.modelData > 0
                     implicitWidth: 26
                     implicitHeight: 26
-                    radius: 13
+                    radius: 0
                     color: parent.today ? Theme.accent : "transparent"
 
                     StyledText {

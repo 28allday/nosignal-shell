@@ -164,7 +164,7 @@ Variants {
                         anchors.topMargin: 1
                         implicitWidth: 6
                         implicitHeight: 6
-                        radius: 3
+                        radius: 0
                         color: Theme.accent
                     }
                 }

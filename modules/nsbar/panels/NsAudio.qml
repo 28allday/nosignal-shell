@@ -122,13 +122,13 @@ NsPanel {
             Rectangle {
                 Layout.fillWidth: true
                 implicitHeight: 6
-                radius: 3
+                radius: 0
                 color: Theme.fillSubtle
 
                 Rectangle {
                     width: parent.width * Math.max(0, Math.min(1, s.value))
                     height: parent.height
-                    radius: 3
+                    radius: 0
                     color: Theme.accent
                 }
 
@@ -137,7 +137,7 @@ NsPanel {
                     anchors.verticalCenter: parent.verticalCenter
                     implicitWidth: 14
                     implicitHeight: 14
-                    radius: 7
+                    radius: 0
                     color: Theme.accent
                 }
 

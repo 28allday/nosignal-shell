@@ -28,7 +28,7 @@ NsPanel {
         Rectangle {
             implicitWidth: 40
             implicitHeight: 40
-            radius: 20
+            radius: 0
             gradient: Gradient {
                 orientation: Gradient.Vertical
                 GradientStop {
@@ -75,7 +75,7 @@ NsPanel {
         Rectangle {
             implicitWidth: 34
             implicitHeight: 34
-            radius: 17
+            radius: 0
             color: pwrMa.containsMouse ? Theme.accentSoft : Theme.fillSubtle
 
             NsIcon {
@@ -264,7 +264,7 @@ NsPanel {
             Rectangle {
                 implicitWidth: 30
                 implicitHeight: 30
-                radius: 15
+                radius: 0
                 color: tile.on ? Theme.accent : Qt.rgba(1, 1, 1, 0.06)
 
                 NsIcon {
@@ -319,13 +319,13 @@ NsPanel {
 
             Layout.fillWidth: true
             implicitHeight: 6
-            radius: 3
+            radius: 0
             color: Theme.fillSubtle
 
             Rectangle {
                 width: parent.width * Math.max(0, Math.min(1, s.value))
                 height: parent.height
-                radius: 3
+                radius: 0
                 color: Theme.accent
             }
 
@@ -334,7 +334,7 @@ NsPanel {
                 anchors.verticalCenter: parent.verticalCenter
                 implicitWidth: 14
                 implicitHeight: 14
-                radius: 7
+                radius: 0
                 color: Theme.accent
             }
 
@@ -362,7 +362,7 @@ NsPanel {
 
         implicitWidth: 28
         implicitHeight: 28
-        radius: 14
+        radius: 0
         color: mbm.containsMouse ? Theme.hover : "transparent"
 
         NsIcon {

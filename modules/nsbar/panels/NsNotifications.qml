@@ -40,7 +40,7 @@ NsPanel {
         Rectangle {
             implicitWidth: 26
             implicitHeight: 26
-            radius: 13
+            radius: 0
             color: Notifs.dnd ? Theme.accentSoft : dndMa.containsMouse ? Theme.hover : "transparent"
 
             NsIcon {

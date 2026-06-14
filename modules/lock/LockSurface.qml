@@ -157,7 +157,7 @@ WlSessionLockSurface {
             Layout.topMargin: 64
             implicitWidth: 74
             implicitHeight: 74
-            radius: 37
+            radius: 0
             gradient: Gradient {
                 orientation: Gradient.Vertical
                 GradientStop {

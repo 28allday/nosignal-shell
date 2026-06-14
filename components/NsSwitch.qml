@@ -13,7 +13,7 @@ Rectangle {
 
     implicitWidth: 38
     implicitHeight: 22
-    radius: 11
+    radius: 0
     color: on ? Theme.accent : Theme.fillSubtle
 
     Behavior on color {
@@ -27,7 +27,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         implicitWidth: 16
         implicitHeight: 16
-        radius: 8
+        radius: 0
         color: root.on ? Theme.onAccent : Theme.text
 
         Behavior on x {
