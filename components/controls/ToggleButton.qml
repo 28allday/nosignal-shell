@@ -54,12 +54,12 @@ StyledRect {
         anchors.centerIn: parent
         spacing: Tokens.spacing.medium
 
-        MaterialIcon {
+        NsIcon {
             id: toggleBtnIcon
 
             visible: !!text
             fill: root.toggled ? 1 : 0
-            text: root.icon
+            icon: root.icon
             color: root.toggled ? Colours.palette[`m3on${root.accent}`] : Colours.palette[`m3on${root.accent}Container`]
             fontStyle: Tokens.font.icon.size(root.iconSize).build()
 

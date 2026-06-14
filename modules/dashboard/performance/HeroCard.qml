@@ -40,11 +40,11 @@ StyledRect {
             Anim {}
         }
 
-        MaterialIcon {
+        NsIcon {
             id: icon
 
             anchors.centerIn: parent
-            text: root.icon
+            icon: root.icon
             color: root.accent
             fontStyle: Tokens.font.icon.medium
         }
@@ -84,9 +84,9 @@ StyledRect {
             Layout.leftMargin: -Tokens.padding.extraSmall
             spacing: Tokens.spacing.extraSmall
 
-            MaterialIcon {
+            NsIcon {
                 Layout.topMargin: Math.round(fontInfo.pointSize * 0.08)
-                text: root.temperature > 90 ? "thermometer_alert" : "thermometer"
+                icon: root.temperature > 90 ? "thermometer_alert" : "thermometer"
                 color: root.temperature > 90 ? Colours.palette.m3error : root.accent
                 fontStyle: Tokens.font.icon.medium
                 fill: 1

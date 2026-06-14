@@ -75,8 +75,8 @@ Item {
                 asynchronous: true
                 active: pfp.status !== Image.Ready
 
-                sourceComponent: MaterialIcon {
-                    text: "person_add"
+                sourceComponent: NsIcon {
+                    icon: "person_add"
                     color: Colours.palette.m3onSurfaceVariant
                     fontStyle: Tokens.font.icon.extraLarge
                     fill: 1
@@ -120,9 +120,9 @@ Item {
                         }
                     }
 
-                    MaterialIcon {
+                    NsIcon {
                         anchors.centerIn: parent
-                        text: "person_edit"
+                        icon: "person_edit"
                         color: Colours.palette.m3onPrimary
                         fontStyle: Tokens.font.icon.large
                     }
@@ -187,9 +187,9 @@ Item {
             CAnim {}
         }
 
-        MaterialIcon {
+        NsIcon {
             anchors.centerIn: parent
-            text: "clock_arrow_up"
+            icon: "clock_arrow_up"
             color: Colours.palette.m3onTertiaryContainer
             fontStyle: Tokens.font.icon.medium
         }
@@ -251,11 +251,11 @@ Item {
             anchors.centerIn: parent
             spacing: Tokens.spacing.extraSmall
 
-            MaterialIcon {
+            NsIcon {
                 id: wmIcon
 
                 anchors.verticalCenter: parent.verticalCenter
-                text: "select_window"
+                icon: "select_window"
                 color: Colours.palette.m3onSecondaryContainer
                 fontStyle: wmText.font
             }

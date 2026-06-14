@@ -65,9 +65,9 @@ StyledClippingRect {
 
         spacing: 0
 
-        MaterialIcon {
+        NsIcon {
             Layout.leftMargin: -Tokens.padding.extraSmall
-            text: "battery_full"
+            icon: "battery_full"
             color: contents.accentColour
             fontStyle: Tokens.font.icon.large
         }
@@ -115,8 +115,8 @@ StyledClippingRect {
             Layout.alignment: Qt.AlignRight
             spacing: Tokens.spacing.extraSmall
 
-            MaterialIcon {
-                text: "bolt"
+            NsIcon {
+                icon: "bolt"
                 color: contents.accentColour
                 fontStyle: Tokens.font.icon.large
                 fill: 1

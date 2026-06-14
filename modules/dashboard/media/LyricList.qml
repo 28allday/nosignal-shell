@@ -212,9 +212,9 @@ Item {
         sourceComponent: ColumnLayout {
             spacing: Tokens.spacing.small
 
-            MaterialIcon {
+            NsIcon {
                 Layout.alignment: Qt.AlignHCenter
-                text: "sentiment_sad"
+                icon: "sentiment_sad"
                 fontStyle: Tokens.font.icon.builders.large.scale(2).build()
                 color: Colours.palette.m3outline
             }

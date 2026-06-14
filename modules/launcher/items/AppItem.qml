@@ -79,8 +79,8 @@ Item {
             anchors.right: parent.right
             active: root.modelData && Strings.testRegexList(GlobalConfig.launcher.favouriteApps, root.modelData.id)
 
-            sourceComponent: MaterialIcon {
-                text: "favorite"
+            sourceComponent: NsIcon {
+                icon: "favorite"
                 fill: 1
                 color: Colours.palette.m3primary
             }

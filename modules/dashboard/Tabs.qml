@@ -153,13 +153,13 @@ Item {
                 onClicked: root.dashState.currentTab = tab.TabBar.index
             }
 
-            MaterialIcon {
+            NsIcon {
                 id: icon
 
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.bottom: label.top
 
-                text: tab.iconName
+                icon: tab.iconName
                 color: tab.current ? Colours.palette.m3primary : Colours.palette.m3onSurfaceVariant
                 fill: tab.current ? 1 : 0
                 fontStyle: Tokens.font.icon.medium

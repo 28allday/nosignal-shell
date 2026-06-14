@@ -30,8 +30,8 @@ StyledRect {
         RowLayout {
             spacing: Tokens.spacing.small
 
-            MaterialIcon {
-                text: "swap_vert"
+            NsIcon {
+                icon: "swap_vert"
                 color: Colours.palette.m3primary
                 fontStyle: Tokens.font.icon.medium
             }
@@ -105,8 +105,8 @@ StyledRect {
             Layout.fillWidth: true
             spacing: Tokens.spacing.small
 
-            MaterialIcon {
-                text: "download"
+            NsIcon {
+                icon: "download"
                 color: Colours.palette.m3tertiary
                 fontStyle: Tokens.font.icon.medium
             }
@@ -136,8 +136,8 @@ StyledRect {
             Layout.fillWidth: true
             spacing: Tokens.spacing.small
 
-            MaterialIcon {
-                text: "upload"
+            NsIcon {
+                icon: "upload"
                 color: Colours.palette.m3secondary
                 fontStyle: Tokens.font.icon.medium
             }
@@ -167,8 +167,8 @@ StyledRect {
             Layout.fillWidth: true
             spacing: Tokens.spacing.small
 
-            MaterialIcon {
-                text: "history"
+            NsIcon {
+                icon: "history"
                 color: Colours.palette.m3onSurfaceVariant
                 fontStyle: Tokens.font.icon.medium
             }

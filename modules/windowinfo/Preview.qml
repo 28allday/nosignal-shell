@@ -40,9 +40,9 @@ Item {
             sourceComponent: ColumnLayout {
                 spacing: 0
 
-                MaterialIcon {
+                NsIcon {
                     Layout.alignment: Qt.AlignHCenter
-                    text: "web_asset_off"
+                    icon: "web_asset_off"
                     color: Colours.palette.m3outline
                     fontStyle: Tokens.font.icon.builders.extraLarge.scale(3).build()
                 }

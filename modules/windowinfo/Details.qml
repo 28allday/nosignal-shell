@@ -135,11 +135,11 @@ ColumnLayout {
 
         spacing: Tokens.spacing.medium
 
-        MaterialIcon {
+        NsIcon {
             id: icon
 
             Layout.alignment: Qt.AlignVCenter
-            text: detail.icon
+            icon: detail.icon
         }
 
         StyledText {

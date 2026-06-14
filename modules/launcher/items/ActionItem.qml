@@ -25,11 +25,11 @@ Item {
         anchors.rightMargin: Tokens.padding.medium
         anchors.margins: Tokens.padding.small
 
-        MaterialIcon {
+        NsIcon {
             id: icon
 
             anchors.verticalCenter: parent.verticalCenter
-            text: root.modelData?.icon ?? ""
+            icon: root.modelData?.icon ?? ""
             color: Colours.palette.m3onSurfaceVariant
             fontStyle: Tokens.font.icon.builders.large.scale(1.3).build()
         }

@@ -23,9 +23,9 @@ Item {
         sourceComponent: ColumnLayout {
             spacing: Tokens.spacing.medium
 
-            MaterialIcon {
+            NsIcon {
                 Layout.alignment: Qt.AlignHCenter
-                text: "tune"
+                icon: "tune"
                 fontStyle: Tokens.font.icon.builders.extraLarge.scale(2).build()
                 color: Colours.palette.m3onSurfaceVariant
             }

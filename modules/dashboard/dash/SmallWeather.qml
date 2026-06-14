@@ -13,14 +13,14 @@ Item {
 
     Component.onCompleted: Weather.reload()
 
-    MaterialIcon {
+    NsIcon {
         id: icon
 
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
 
         animate: true
-        text: Weather.icon
+        icon: Weather.icon
         color: Colours.palette.m3secondary
         fontStyle: Tokens.font.icon.builders.extraLarge.scale(1.6).build()
     }

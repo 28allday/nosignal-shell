@@ -110,8 +110,8 @@ StyledRect {
             Component {
                 id: materialIconComp
 
-                MaterialIcon {
-                    text: Icons.getNotifIcon(root.activeNotifs[0]?.summary, root.urgency)
+                NsIcon {
+                    icon: Icons.getNotifIcon(root.activeNotifs[0]?.summary, root.urgency)
                     color: root.urgency === NotificationUrgency.Critical ? Colours.palette.m3onError : root.urgency === NotificationUrgency.Low ? Colours.palette.m3onSurface : Colours.palette.m3onSecondaryContainer
                     fontStyle: Tokens.font.icon.medium
                 }
@@ -214,9 +214,9 @@ StyledRect {
                             font: Tokens.font.body.small
                         }
 
-                        MaterialIcon {
+                        NsIcon {
                             Layout.rightMargin: -Tokens.padding.extraSmall / 2
-                            text: "expand_more"
+                            icon: "expand_more"
                             color: root.urgency === NotificationUrgency.Critical ? Colours.palette.m3onError : Colours.palette.m3onSurfaceVariant
                             rotation: root.expanded ? 180 : 0
                             Layout.topMargin: root.expanded ? -Math.floor(Tokens.padding.extraSmall) : 0

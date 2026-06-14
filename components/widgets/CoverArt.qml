@@ -57,11 +57,11 @@ Item {
         }
     }
 
-    MaterialIcon {
+    NsIcon {
         anchors.centerIn: parent
 
         grade: 200
-        text: image.status === Image.Error ? "broken_image" : "art_track"
+        icon: image.status === Image.Error ? "broken_image" : "art_track"
         color: Colours.palette.m3onSurfaceVariant
         fontStyle: Tokens.font.icon.size((parent.width * 0.35) || 1).build()
         opacity: image.status === Image.Null || image.status === Image.Error ? 1 : 0

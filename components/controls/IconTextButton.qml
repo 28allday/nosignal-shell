@@ -7,7 +7,7 @@ import qs.services
 ButtonBase {
     id: root
 
-    property alias icon: iconLabel.text
+    property string icon
     property alias text: label.text
 
     readonly property alias iconLabel: iconLabel
@@ -44,9 +44,10 @@ ButtonBase {
         anchors.centerIn: parent
         spacing: Tokens.spacing.small
 
-        MaterialIcon {
+        NsIcon {
             id: iconLabel
 
+            icon: root.icon
             Layout.alignment: Qt.AlignVCenter
             Layout.topMargin: Math.round(fontInfo.pointSize * 0.0575)
             color: root.onColour

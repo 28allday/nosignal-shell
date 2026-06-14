@@ -65,10 +65,10 @@ Item {
             Anim {}
         }
 
-        MaterialIcon {
+        NsIcon {
             anchors.centerIn: parent
-            text: res.icon
-            font: Tokens.font.icon.large
+            icon: res.icon
+            fontStyle: Tokens.font.icon.large
             color: res.fgColour
         }
     }

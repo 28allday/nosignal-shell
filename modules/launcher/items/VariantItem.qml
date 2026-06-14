@@ -26,10 +26,10 @@ Item {
         anchors.rightMargin: Tokens.padding.medium
         anchors.margins: Tokens.padding.small
 
-        MaterialIcon {
+        NsIcon {
             id: icon
 
-            text: root.modelData?.icon ?? ""
+            icon: root.modelData?.icon ?? ""
             fontStyle: Tokens.font.icon.extraLarge
 
             anchors.verticalCenter: parent.verticalCenter
@@ -68,8 +68,8 @@ Item {
 
             active: root.modelData?.variant === Schemes.currentVariant
 
-            sourceComponent: MaterialIcon {
-                text: "check"
+            sourceComponent: NsIcon {
+                icon: "check"
                 color: Colours.palette.m3onSurfaceVariant
                 fontStyle: Tokens.font.icon.large
             }

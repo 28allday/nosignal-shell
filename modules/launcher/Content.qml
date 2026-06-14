@@ -58,14 +58,14 @@ Item {
 
         implicitHeight: Math.max(searchIcon.implicitHeight, search.implicitHeight, clearIcon.implicitHeight)
 
-        MaterialIcon {
+        NsIcon {
             id: searchIcon
 
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             anchors.leftMargin: root.padding
 
-            text: "search"
+            icon: "search"
             color: Colours.palette.m3onSurfaceVariant
         }
 
@@ -145,7 +145,7 @@ Item {
             }
         }
 
-        MaterialIcon {
+        NsIcon {
             id: clearIcon
 
             anchors.verticalCenter: parent.verticalCenter
@@ -163,7 +163,7 @@ Item {
                 return 1;
             }
 
-            text: "close"
+            icon: "close"
             color: Colours.palette.m3onSurfaceVariant
 
             MouseArea {

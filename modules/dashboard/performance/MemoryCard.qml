@@ -31,8 +31,8 @@ StyledRect {
             Layout.leftMargin: -Tokens.padding.extraSmall
             spacing: Tokens.spacing.small
 
-            MaterialIcon {
-                text: "memory_alt"
+            NsIcon {
+                icon: "memory_alt"
                 fill: 1
                 color: root.accent
                 fontStyle: Tokens.font.icon.builders.medium.weight(Font.DemiBold).build() // DemiBold to fix fill issues

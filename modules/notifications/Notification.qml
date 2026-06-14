@@ -177,8 +177,8 @@ StyledRect {
                         anchors.centerIn: parent
                         anchors.verticalCenterOffset: 1
 
-                        sourceComponent: MaterialIcon {
-                            text: Icons.getNotifIcon(root.modelData.summary, root.modelData.urgency)
+                        sourceComponent: NsIcon {
+                            icon: Icons.getNotifIcon(root.modelData.summary, root.modelData.urgency)
                             color: root.modelData.urgency === NotificationUrgency.Critical ? Colours.palette.m3onError : root.modelData.urgency === NotificationUrgency.Low ? Colours.palette.m3onSurface : Colours.palette.m3onSecondaryContainer
                             fontStyle: Tokens.font.icon.medium
                         }
@@ -363,12 +363,12 @@ StyledRect {
                     onClicked: root.expanded = !root.expanded
                 }
 
-                MaterialIcon {
+                NsIcon {
                     id: expandIcon
 
                     anchors.centerIn: parent
                     anchors.verticalCenterOffset: root.expanded ? -1 : 1
-                    text: "expand_more"
+                    icon: "expand_more"
                     fontStyle: Tokens.font.icon.medium
                     rotation: root.expanded ? 180 : 0
 

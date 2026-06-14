@@ -29,9 +29,9 @@ ColumnLayout {
         RowLayout {
             spacing: Tokens.spacing.medium
 
-            MaterialIcon {
+            NsIcon {
                 Layout.alignment: Qt.AlignVCenter
-                text: "list"
+                icon: "list"
                 fontStyle: Tokens.font.icon.large
             }
 
@@ -165,9 +165,9 @@ ColumnLayout {
             sourceComponent: ColumnLayout {
                 spacing: Tokens.spacing.small
 
-                MaterialIcon {
+                NsIcon {
                     Layout.alignment: Qt.AlignHCenter
-                    text: "scan_delete"
+                    icon: "scan_delete"
                     color: Colours.palette.m3outline
                     fontStyle: Tokens.font.icon.extraLarge
 
@@ -193,9 +193,9 @@ ColumnLayout {
                 RowLayout {
                     spacing: Tokens.spacing.medium
 
-                    MaterialIcon {
+                    NsIcon {
                         Layout.alignment: Qt.AlignHCenter
-                        text: "scan_delete"
+                        icon: "scan_delete"
                         color: Colours.palette.m3outline
 
                         opacity: !root.props.recordingListExpanded ? 1 : 0

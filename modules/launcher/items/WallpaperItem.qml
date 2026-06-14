@@ -57,9 +57,9 @@ Item {
         implicitWidth: Tokens.sizes.launcher.wallpaperWidth
         implicitHeight: implicitWidth / 16 * 9
 
-        MaterialIcon {
+        NsIcon {
             anchors.centerIn: parent
-            text: "image"
+            icon: "image"
             color: Colours.tPalette.m3outline
             fontStyle: Tokens.font.icon.builders.extraLarge.scale(2).weight(Font.DemiBold).build()
         }

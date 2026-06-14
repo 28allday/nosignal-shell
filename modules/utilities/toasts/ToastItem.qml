@@ -70,11 +70,11 @@ StyledRect {
             implicitWidth: implicitHeight
             implicitHeight: icon.implicitHeight + Tokens.padding.large
 
-            MaterialIcon {
+            NsIcon {
                 id: icon
 
                 anchors.centerIn: parent
-                text: root.modelData.icon
+                icon: root.modelData.icon
                 color: {
                     if (root.modelData.type === Toast.Success)
                         return Colours.palette.m3onSuccess;

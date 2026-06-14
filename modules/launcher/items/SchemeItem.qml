@@ -92,8 +92,8 @@ Item {
 
             active: `${root.modelData?.name} ${root.modelData?.flavour}` === Schemes.currentScheme
 
-            sourceComponent: MaterialIcon {
-                text: "check"
+            sourceComponent: NsIcon {
+                icon: "check"
                 color: Colours.palette.m3onSurfaceVariant
                 fontStyle: Tokens.font.icon.large
             }

@@ -76,9 +76,9 @@ Item {
                 anchors.centerIn: parent
                 spacing: Tokens.spacing.largeIncreased
 
-                MaterialIcon {
+                NsIcon {
                     Layout.alignment: Qt.AlignVCenter
-                    text: Weather.icon
+                    icon: Weather.icon
                     fontStyle: Tokens.font.icon.builders.extraLarge.scale(3).build()
                     color: Colours.palette.m3secondary
                     animate: true
@@ -180,9 +180,9 @@ Item {
                             color: Colours.palette.m3onSurfaceVariant
                         }
 
-                        MaterialIcon {
+                        NsIcon {
                             Layout.alignment: Qt.AlignHCenter
-                            text: forecastItem.modelData.icon
+                            icon: forecastItem.modelData.icon
                             fontStyle: Tokens.font.icon.extraLarge
                             color: Colours.palette.m3secondary
                         }
@@ -216,8 +216,8 @@ Item {
             anchors.centerIn: parent
             spacing: Tokens.spacing.medium
 
-            MaterialIcon {
-                text: detailRoot.icon
+            NsIcon {
+                icon: detailRoot.icon
                 color: detailRoot.colour
                 fontStyle: Tokens.font.icon.large
                 anchors.verticalCenter: parent.verticalCenter
@@ -252,8 +252,8 @@ Item {
 
         spacing: Tokens.spacing.small
 
-        MaterialIcon {
-            text: weatherStat.icon
+        NsIcon {
+            icon: weatherStat.icon
             fontStyle: Tokens.font.icon.extraLarge
             color: weatherStat.colour
         }

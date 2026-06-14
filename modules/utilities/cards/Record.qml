@@ -43,12 +43,12 @@ StyledRect {
                 radius: Tokens.rounding.full
                 color: Recorder.running ? Colours.palette.m3secondary : Colours.palette.m3secondaryContainer
 
-                MaterialIcon {
+                NsIcon {
                     id: icon
 
                     anchors.centerIn: parent
                     anchors.verticalCenterOffset: 1
-                    text: "screen_record"
+                    icon: "screen_record"
                     color: Recorder.running ? Colours.palette.m3onSecondary : Colours.palette.m3onSecondaryContainer
                     fontStyle: Tokens.font.icon.large
                 }

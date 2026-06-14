@@ -45,8 +45,8 @@ ColumnLayout {
                 Layout.fillWidth: true
             }
 
-            MaterialIcon {
-                text: "expand_more"
+            NsIcon {
+                icon: "expand_more"
                 rotation: root.expanded ? 180 : 0
                 color: Colours.palette.m3onSurfaceVariant
                 fontStyle: Tokens.font.icon.medium

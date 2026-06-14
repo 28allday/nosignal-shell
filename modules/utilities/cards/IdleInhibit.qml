@@ -33,11 +33,11 @@ StyledRect {
             radius: Tokens.rounding.full
             color: IdleInhibitor.enabled ? Colours.palette.m3secondary : Colours.palette.m3secondaryContainer
 
-            MaterialIcon {
+            NsIcon {
                 id: icon
 
                 anchors.centerIn: parent
-                text: "coffee"
+                icon: "coffee"
                 color: IdleInhibitor.enabled ? Colours.palette.m3onSecondary : Colours.palette.m3onSecondaryContainer
                 fontStyle: Tokens.font.icon.large
             }

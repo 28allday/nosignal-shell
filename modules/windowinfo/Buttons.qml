@@ -41,13 +41,13 @@ ColumnLayout {
                 onClicked: root.moveToWsExpanded = !root.moveToWsExpanded
             }
 
-            MaterialIcon {
+            NsIcon {
                 id: moveToWsIcon
 
                 anchors.centerIn: parent
 
                 animate: true
-                text: root.moveToWsExpanded ? "expand_more" : "keyboard_arrow_right"
+                icon: root.moveToWsExpanded ? "expand_more" : "keyboard_arrow_right"
                 color: Colours.palette.m3onPrimary
                 fontStyle: Tokens.font.icon.large
             }

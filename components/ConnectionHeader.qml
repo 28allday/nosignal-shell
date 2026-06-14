@@ -12,10 +12,10 @@ ColumnLayout {
     spacing: Tokens.spacing.medium
     Layout.alignment: Qt.AlignHCenter
 
-    MaterialIcon {
+    NsIcon {
         Layout.alignment: Qt.AlignHCenter
         animate: true
-        text: root.icon
+        icon: root.icon
         fontStyle: Tokens.font.icon.builders.extraLarge.scale(3).weight(Font.Bold).build()
     }
 

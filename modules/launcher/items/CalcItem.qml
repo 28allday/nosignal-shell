@@ -40,8 +40,8 @@ Item {
 
         spacing: Tokens.spacing.medium
 
-        MaterialIcon {
-            text: "function"
+        NsIcon {
+            icon: "function"
             fontStyle: Tokens.font.icon.extraLarge
             Layout.alignment: Qt.AlignVCenter
         }
@@ -105,14 +105,14 @@ Item {
                 }
             }
 
-            MaterialIcon {
+            NsIcon {
                 id: icon
 
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.right: parent.right
                 anchors.rightMargin: Tokens.padding.medium
 
-                text: "open_in_new"
+                icon: "open_in_new"
                 color: Colours.palette.m3onTertiary
                 fontStyle: Tokens.font.icon.large
             }

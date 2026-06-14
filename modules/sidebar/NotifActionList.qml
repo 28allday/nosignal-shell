@@ -160,9 +160,9 @@ Item {
                     Component {
                         id: iconBtn
 
-                        MaterialIcon {
+                        NsIcon {
                             animate: action.modelData.isCopy ?? false
-                            text: action.modelData.isCopy ? "content_copy" : "close"
+                            icon: action.modelData.isCopy ? "content_copy" : "close"
                             color: Colours.palette.m3onSurfaceVariant
                         }
                     }

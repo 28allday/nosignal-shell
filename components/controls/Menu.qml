@@ -157,9 +157,9 @@ MouseArea {
                             anchors.margins: Tokens.padding.medium
                             spacing: Tokens.spacing.small
 
-                            MaterialIcon {
+                            NsIcon {
                                 Layout.alignment: Qt.AlignVCenter
-                                text: item.modelData?.icon ?? ""
+                                icon: item.modelData?.icon ?? ""
                                 color: item.active ? Colours.palette.m3onTertiaryContainer : Colours.palette.m3onSurfaceVariant
                             }
 
@@ -176,8 +176,8 @@ MouseArea {
                                 active: item.modelData?.trailingIcon.length > 0
                                 visible: active
 
-                                sourceComponent: MaterialIcon {
-                                    text: item.modelData.trailingIcon
+                                sourceComponent: NsIcon {
+                                    icon: item.modelData.trailingIcon
                                     color: item.active ? Colours.palette.m3onTertiaryContainer : Colours.palette.m3onSurfaceVariant
                                 }
                             }

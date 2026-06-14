@@ -200,7 +200,39 @@ Singleton {
         "dock": root.cp(0xf2d1),
         // lock screen
         "login": root.cp(0xf090),
-        "key": root.cp(0xf084)
+        "key": root.cp(0xf084),
+        // dashboard / utilities / launcher leftovers
+        "account_tree": root.cp(0xf0e8),
+        "android": root.cp(0xf17b),
+        "category": root.cp(0xf02c),
+        "clear_all": root.cp(0xf2ed),
+        "compare": root.cp(0xf362),
+        "compare_arrows": root.cp(0xf362),
+        "contrast": root.cp(0xf042),
+        "delete_forever": root.cp(0xf1f8),
+        "filter_b_and_w": root.cp(0xf0b0),
+        "fullscreen": root.cp(0xf065),
+        "gamepad": root.cp(0xf11b),
+        "gradient": root.cp(0xf043),
+        "hard_disk": root.cp(0xf0a0),
+        "keep": root.cp(0xf08d),
+        "location_on": root.cp(0xf041),
+        "location_searching": root.cp(0xf05b),
+        "looks": root.cp(0xf53f),
+        "memory": root.cp(0xf2db),
+        "notifications_off": root.cp(0xf1f6),
+        "nutrition": root.cp(0xf787),
+        "page_header": root.cp(0xf036),
+        "picture_in_picture_center": root.cp(0xf2d0),
+        "resize": root.cp(0xf065),
+        "screenshot_region": root.cp(0xf247),
+        "select_to_speak": root.cp(0xf028),
+        "sentiment_calm": root.cp(0xf118),
+        "sentiment_very_dissatisfied": root.cp(0xf119),
+        "stop": root.cp(0xf04d),
+        "thermostat": root.cp(0xf2c9),
+        "water_drop": root.cp(0xf043),
+        "wb_twilight": root.cp(0xf185)
     }
 
     function get(name: string): string {

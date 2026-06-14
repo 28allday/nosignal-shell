@@ -20,9 +20,9 @@ Item {
             spacing: Tokens.spacing.medium
             z: 1
 
-            MaterialIcon {
+            NsIcon {
                 Layout.topMargin: Math.round(fontInfo.pointSize * 0.12)
-                text: "lyrics"
+                icon: "lyrics"
                 fontStyle: Tokens.font.icon.medium
             }
 

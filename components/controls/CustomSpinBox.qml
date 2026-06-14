@@ -110,11 +110,11 @@ RowLayout {
             }
         }
 
-        MaterialIcon {
+        NsIcon {
             id: upIcon
 
             anchors.centerIn: parent
-            text: "keyboard_arrow_up"
+            icon: "keyboard_arrow_up"
             color: Colours.palette.m3onPrimary
         }
     }
@@ -145,11 +145,11 @@ RowLayout {
             onReleased: timer.stop()
         }
 
-        MaterialIcon {
+        NsIcon {
             id: downIcon
 
             anchors.centerIn: parent
-            text: "keyboard_arrow_down"
+            icon: "keyboard_arrow_down"
             color: Colours.palette.m3onPrimary
         }
     }

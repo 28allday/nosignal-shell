@@ -55,9 +55,9 @@ StyledRect {
                     anchors.centerIn: parent
                     spacing: 0
 
-                    MaterialIcon {
+                    NsIcon {
                         Layout.alignment: Qt.AlignHCenter
-                        text: "hard_drive"
+                        icon: "hard_drive"
                         color: root.accent
                         fontStyle: Tokens.font.icon.medium
                     }

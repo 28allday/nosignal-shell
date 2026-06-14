@@ -64,12 +64,12 @@ Row {
             anchors.horizontalCenterOffset: Math.floor(root.verticalPadding / 4)
             spacing: Tokens.spacing.small
 
-            MaterialIcon {
+            NsIcon {
                 id: iconLabel
 
                 Layout.alignment: Qt.AlignVCenter
                 animate: true
-                text: root.active?.activeIcon ?? root.fallbackIcon
+                icon: root.active?.activeIcon ?? root.fallbackIcon
                 color: root.disabled ? root.disabledTextColour : root.textColour
                 fill: 1
             }
@@ -116,13 +116,13 @@ Row {
             onClicked: root.expanded = !root.expanded
         }
 
-        MaterialIcon {
+        NsIcon {
             id: expandIcon
 
             anchors.centerIn: parent
             anchors.horizontalCenterOffset: root.expanded ? 0 : -Math.floor(root.verticalPadding / 4)
 
-            text: "expand_more"
+            icon: "expand_more"
             color: root.disabled ? root.disabledTextColour : root.textColour
             rotation: root.expanded ? 180 : 0
 

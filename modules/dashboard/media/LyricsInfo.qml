@@ -197,11 +197,11 @@ Item {
         hoverEnabled: true
         onClicked: root.open = !root.open
 
-        MaterialIcon {
+        NsIcon {
             id: icon
 
             anchors.centerIn: parent
-            text: "more_vert"
+            icon: "more_vert"
             fontStyle: Tokens.font.icon.medium
         }
     }
