@@ -6,7 +6,7 @@ import qs.services
 ButtonBase {
     id: root
 
-    property alias icon: label.text
+    property alias icon: label.icon
     readonly property alias label: label
 
     font: Tokens.font.icon.medium
@@ -34,11 +34,10 @@ ButtonBase {
         return h;
     }
 
-    MaterialIcon {
+    NsIcon {
         id: label
 
         anchors.centerIn: parent
-        anchors.verticalCenterOffset: 1 // AHHHHHHH material symbols whyyyy
         color: root.onColour
         fontStyle: root.font
         fill: !root.isToggle || root.internalChecked ? 1 : 0
