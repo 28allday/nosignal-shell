@@ -211,7 +211,10 @@ StyledWindow {
             panel: panels.notifications
             deformAmount: 0 // NoSignal: square notification toasts
             radius: 0
-            opacity: 0 // toasts draw their own square cards
+            opacity: 0
+            visible: false
+            implicitWidth: 0 // collapse the blob entirely (toasts draw their own square cards)
+            implicitHeight: 0
         }
 
         PanelBg {

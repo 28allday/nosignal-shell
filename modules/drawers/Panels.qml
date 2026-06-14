@@ -70,7 +70,7 @@ Item {
         sessionPanel: sessionWrapper
         utilitiesPanel: utilities
 
-        anchors.top: parent.top
+        y: 46 // NoSignal: drop the toasts below the 38px NsBar (+ gap)
         anchors.right: parent.right
     }
 
