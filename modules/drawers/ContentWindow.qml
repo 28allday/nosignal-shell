@@ -198,7 +198,9 @@ StyledWindow {
             id: osdBg
 
             panel: panels.osdWrapper
-            deformAmount: 0.25
+            deformAmount: 0 // NoSignal: square OSD (no organic blob deformation)
+            radius: 0
+            opacity: 0 // NoSignal: OSD draws its own flat square glass bg (osd/Content)
             x: panels.osdWrapper.x + panels.osd.x + root.borderThickness
             implicitWidth: panels.osd.width
         }

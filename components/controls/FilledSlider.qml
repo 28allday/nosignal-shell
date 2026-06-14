@@ -16,7 +16,7 @@ Slider {
 
     background: StyledRect {
         color: Colours.layer(Colours.palette.m3surfaceContainer, 2)
-        radius: Tokens.rounding.full
+        radius: 0
 
         StyledRect {
             anchors.left: parent.left
@@ -51,7 +51,7 @@ Slider {
             anchors.fill: parent
 
             color: Colours.palette.m3inverseSurface
-            radius: Tokens.rounding.full
+            radius: 0
 
             MouseArea {
                 id: handleInteraction

@@ -24,6 +24,15 @@ Item {
     implicitWidth: layout.implicitWidth + Tokens.padding.large + layout.anchors.horizontalCenterOffset * 2
     implicitHeight: layout.implicitHeight + Tokens.padding.large * 2
 
+    // NoSignal: flat square glass background matching the design popouts
+    Rectangle {
+        anchors.fill: parent
+        color: Theme.panelBg
+        radius: 0
+        border.width: 1
+        border.color: Theme.panelBorder
+    }
+
     ColumnLayout {
         id: layout
 
