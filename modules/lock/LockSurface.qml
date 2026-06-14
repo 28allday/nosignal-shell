@@ -26,8 +26,8 @@ WlSessionLockSurface {
 
     readonly property bool errored: root.pam.state === "error" || root.pam.state === "fail"
 
-    contentItem.Config.screen: screen.name
-    contentItem.Tokens.screen: screen.name
+    contentItem.Config.screen: screen?.name ?? ""
+    contentItem.Tokens.screen: screen?.name ?? ""
 
     color: "transparent"
 

@@ -63,7 +63,7 @@ Item {
         anchors.rightMargin: root.clampedPadding
 
         color: "transparent"
-        radius: Tokens.rounding.large
+        radius: 0
 
         StyledListView {
             id: list

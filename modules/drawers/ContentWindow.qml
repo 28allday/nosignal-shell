@@ -209,6 +209,9 @@ StyledWindow {
             id: notifsBg
 
             panel: panels.notifications
+            deformAmount: 0 // NoSignal: square notification toasts
+            radius: 0
+            opacity: 0 // toasts draw their own square cards
         }
 
         PanelBg {
