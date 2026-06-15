@@ -41,15 +41,43 @@ Singleton {
                 fetchCoordsFromCity(configLocation);
             }
         } else if (!loc || timer.elapsed() > 900) {
-            Requests.get("https://ipinfo.io/json", text => {
+            fetchLocationFromIp();
+        }
+    }
+
+    // Auto-detect location from the public IP (used when weatherLocation is
+    // empty). Stock caelestia only queried ipinfo.io with no error handling;
+    // on the 2026-06-15 hardware test that call never populated `loc` (the
+    // city path works via the same Requests.get, so it is provider-specific —
+    // finding F-W2). Repair: wrap parsing defensively and fall back to a second
+    // provider (geojs.io, which returns separate latitude/longitude fields) on
+    // any error or empty response.
+    function fetchLocationFromIp(): void {
+        const useGeoJs = () => {
+            Requests.get("https://get.geojs.io/v1/ip/geo.json", text => {
+                try {
+                    const g = JSON.parse(text);
+                    if (g.latitude && g.longitude) {
+                        loc = g.latitude + "," + g.longitude;
+                        city = g.city ?? "";
+                        timer.restart();
+                    }
+                } catch (e) {}
+            });
+        };
+
+        Requests.get("https://ipinfo.io/json", text => {
+            try {
                 const response = JSON.parse(text);
                 if (response.loc) {
                     loc = response.loc;
                     city = response.city ?? "";
                     timer.restart();
+                    return;
                 }
-            });
-        }
+            } catch (e) {}
+            useGeoJs();
+        }, useGeoJs);
     }
 
     function fetchCityFromCoords(coords: string): void {
@@ -131,8 +159,10 @@ Singleton {
             for (let i = 0; i < json.daily.time.length; i++)
                 forecastList.push({
                     date: json.daily.time[i].replace(/-/g, "/"),
-                    maxTempC: json.daily.temperature_2m_max[i],
-                    minTempC: json.daily.temperature_2m_min[i],
+                    maxTempC: Math.round(json.daily.temperature_2m_max[i]),
+                    minTempC: Math.round(json.daily.temperature_2m_min[i]),
+                    maxTempF: Math.round(toFahrenheit(json.daily.temperature_2m_max[i])),
+                    minTempF: Math.round(toFahrenheit(json.daily.temperature_2m_min[i])),
                     weatherCode: json.daily.weather_code[i],
                     icon: Icons.getWeatherIcon(json.daily.weather_code[i])
                 });
@@ -210,6 +240,11 @@ Singleton {
 
     onLocChanged: fetchWeatherData()
 
+    // Stock caelestia only called reload() on a config CHANGE, never at startup,
+    // so a saved location blanked after a reboot and an empty (auto/IP) location
+    // never populated on a fresh boot (finding F-W1). Fetch once on load.
+    Component.onCompleted: reload()
+
     Connections {
         function onWeatherLocationChanged(): void {
             root.reload();
@@ -222,7 +257,7 @@ Singleton {
         interval: 3600000 // 1 hour
         running: true
         repeat: true
-        onTriggered: fetchWeatherData()
+        onTriggered: reload() // re-detect an auto/IP location too, not just refetch a known one
     }
 
     ElapsedTimer {

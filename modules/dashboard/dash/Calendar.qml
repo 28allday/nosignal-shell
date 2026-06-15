@@ -62,7 +62,7 @@ CustomMouseArea {
 
                 StateLayer {
                     color: Colours.palette.m3primary
-                    radius: pressed ? Tokens.rounding.small : Tokens.rounding.large
+                    radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
                     disabled: {
                         const now = new Date();
                         return root.currMonth === now.getMonth() && root.currYear === now.getFullYear();

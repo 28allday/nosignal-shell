@@ -86,7 +86,7 @@ Item {
             implicitHeight: parent.implicitHeight * 2
 
             color: Colours.palette.m3primary
-            radius: Tokens.rounding.full
+            radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
         }
 
         Behavior on x {
@@ -148,7 +148,7 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
                 implicitHeight: parent.height + Tokens.sizes.dashboard.tabIndicatorSpacing * 2
 
-                radius: Tokens.rounding.medium
+                radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
                 color: tab.current ? Colours.palette.m3primary : Colours.palette.m3onSurface
                 onClicked: root.dashState.currentTab = tab.TabBar.index
             }

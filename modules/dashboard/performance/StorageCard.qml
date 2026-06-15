@@ -14,7 +14,7 @@ StyledRect {
     readonly property real percentage: Storage.primaryDisk?.perc ?? 0
 
     color: Colours.tPalette.m3surfaceContainer
-    radius: Tokens.rounding.extraExtraLarge
+    radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
 
     implicitWidth: layout.implicitWidth + layout.anchors.margins * 2
     implicitHeight: layout.implicitHeight + Tokens.padding.large * 2

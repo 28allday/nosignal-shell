@@ -75,7 +75,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.margins: Tokens.padding.large
 
-        radius: Tokens.rounding.large
+        radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
         color: "transparent"
 
         Flickable {

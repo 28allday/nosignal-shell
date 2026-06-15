@@ -12,7 +12,7 @@ StyledRect {
     readonly property color accent: Colours.palette.m3tertiary
 
     color: Colours.tPalette.m3surfaceContainer
-    radius: Tokens.rounding.medium
+    radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
 
     implicitWidth: layout.implicitWidth + Tokens.padding.extraLargeIncreased * 2
     implicitHeight: layout.implicitHeight + Tokens.padding.large * 2

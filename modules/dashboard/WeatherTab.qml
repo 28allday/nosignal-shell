@@ -67,7 +67,7 @@ Item {
             Layout.fillWidth: true
             implicitHeight: bigInfoRow.implicitHeight + Tokens.padding.small
 
-            radius: Tokens.rounding.extraLarge * 2
+            radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
             color: Colours.tPalette.m3surfaceContainer
 
             RowLayout {
@@ -155,7 +155,7 @@ Item {
                     Layout.fillWidth: true
                     implicitHeight: forecastItemColumn.implicitHeight + Tokens.padding.medium * 2
 
-                    radius: Tokens.rounding.large
+                    radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
                     color: Colours.tPalette.m3surfaceContainer
 
                     ColumnLayout {
@@ -209,7 +209,7 @@ Item {
 
         Layout.fillWidth: true
         Layout.preferredHeight: 60
-        radius: Tokens.rounding.medium
+        radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
         color: Colours.tPalette.m3surfaceContainer
 
         Row {

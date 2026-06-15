@@ -176,7 +176,7 @@ Item {
                 implicitWidth: shape.implicitSize + Tokens.padding.medium * 2
                 implicitHeight: shape.implicitSize + Tokens.padding.medium * 2
                 color: Colours.palette.m3primaryContainer
-                radius: Tokens.rounding.full
+                radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
 
                 LoadingIndicator {
                     id: shape

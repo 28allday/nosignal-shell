@@ -10,7 +10,7 @@ StyledRect {
     id: root
 
     color: Colours.tPalette.m3surfaceContainer
-    radius: Tokens.rounding.extraLarge
+    radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
 
     implicitWidth: Tokens.sizes.dashboard.perfNetworkCardWidth
     implicitHeight: Tokens.sizes.dashboard.perfNetworkCardHeight

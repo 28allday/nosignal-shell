@@ -145,16 +145,21 @@ Singleton {
         "warning": root.cp(0xf071),
         "web_asset_off": root.cp(0xf2d0),
         "wifi_find": root.cp(0xf1eb),
-        // weather (Icons.getWeatherIcon)
-        "clear_day": root.cp(0xf185),
-        "clear_night": root.cp(0xf186),
-        "partly_cloudy_day": root.cp(0xf6c4),
-        "cloudy": root.cp(0xf0c2),
-        "cloud": root.cp(0xf0c2),
-        "rainy": root.cp(0xf73d),
-        "cloudy_snowing": root.cp(0xf2dc),
-        "foggy": root.cp(0xf75f),
-        "air": root.cp(0xf72e),
+        // weather (Icons.getWeatherIcon) — Material-weather family, every
+        // codepoint verified present in JetBrainsMono Nerd Font Mono. The old
+        // Font-Awesome mapping had several glyphs absent from the font (rendered
+        // as "?" boxes) and was missing thunderstorm/snowing_heavy (F-D1).
+        "clear_day": root.cp(0xf0599),
+        "clear_night": root.cp(0xf0594),
+        "partly_cloudy_day": root.cp(0xf0595),
+        "cloudy": root.cp(0xf0590),
+        "cloud": root.cp(0xf0590),
+        "rainy": root.cp(0xf0597),
+        "cloudy_snowing": root.cp(0xf0598),
+        "snowing_heavy": root.cp(0xf0f37),
+        "thunderstorm": root.cp(0xf0593),
+        "foggy": root.cp(0xf0591),
+        "air": root.cp(0xf059d),
         // apps / devices (Icons.get*)
         "code": root.cp(0xf121),
         "forum": root.cp(0xf086),

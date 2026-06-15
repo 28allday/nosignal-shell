@@ -16,6 +16,7 @@ import Quickshell
 import Quickshell.Wayland
 import Quickshell.Bluetooth
 import Quickshell.Services.UPower
+import Quickshell.Services.SystemTray
 import qs.services
 import qs.utils
 import qs.components
@@ -139,10 +140,12 @@ Variants {
                 }
             }
 
-            // System tray
+            // System tray — only shown when an app actually registers a tray
+            // icon, otherwise the pill just opened an empty panel (F-T1).
             IconPill {
                 icon: "widgets"
                 panel: "tray"
+                visible: SystemTray.items.values.length > 0
             }
 
             // Notifications bell (with unread dot overlaid on the icon)

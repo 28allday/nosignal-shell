@@ -33,7 +33,7 @@ Item {
         anchors.fill: parent
         anchors.margins: !btn.pressed && btn.containsMouse ? -Tokens.padding.extraSmall : 0
         group: blobGroup
-        radius: Tokens.rounding.medium
+        radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
 
         Behavior on anchors.margins {
             Anim {}
@@ -50,7 +50,7 @@ Item {
         implicitHeight: parent.height
 
         group: blobGroup
-        radius: Tokens.rounding.medium
+        radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
         deformScale: 0.00001
 
         states: State {

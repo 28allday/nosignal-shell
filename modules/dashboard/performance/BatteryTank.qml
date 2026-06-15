@@ -12,7 +12,7 @@ StyledClippingRect {
     property real animPerc: UPower.displayDevice.percentage
 
     color: Colours.palette.m3secondaryContainer
-    radius: Tokens.rounding.large
+    radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
 
     implicitWidth: Config.dashboard.performance.showCpu || (Config.dashboard.performance.showGpu && Gpu.type !== Gpu.None) || Config.dashboard.performance.showStorage || Config.dashboard.performance.showMemory ? Tokens.sizes.dashboard.perfBattWidth : Tokens.sizes.dashboard.perfBattWidthSingle
     implicitHeight: Tokens.sizes.dashboard.perfBattHeight
@@ -39,7 +39,7 @@ StyledClippingRect {
         implicitHeight: parent.height * root.animPerc
 
         color: Colours.palette.m3secondary
-        radius: Tokens.rounding.extraSmall
+        radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
         clip: true
 
         Contents {

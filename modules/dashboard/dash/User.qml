@@ -216,7 +216,7 @@ Item {
 
         implicitWidth: 10
         implicitHeight: 10
-        radius: Tokens.rounding.full
+        radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
         color: Colours.palette.m3secondaryContainer
     }
 
@@ -229,7 +229,7 @@ Item {
 
         implicitWidth: 15
         implicitHeight: 15
-        radius: Tokens.rounding.full
+        radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
         color: Colours.palette.m3secondaryContainer
     }
 
@@ -240,7 +240,7 @@ Item {
         anchors.leftMargin: -Tokens.padding.medium
         y: Tokens.padding.extraSmall
 
-        radius: Tokens.rounding.largeIncreased
+        radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
         color: Colours.palette.m3secondaryContainer
         implicitWidth: wmLabel.implicitWidth + Tokens.padding.medium * 2
         implicitHeight: wmLabel.implicitHeight + Tokens.padding.small * 2

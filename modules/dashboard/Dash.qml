@@ -21,7 +21,7 @@ GridLayout {
         Layout.preferredWidth: Tokens.sizes.dashboard.userWidth
         Layout.fillHeight: true
 
-        radius: Tokens.rounding.extraLarge
+        radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
 
         User {
             id: user
@@ -37,7 +37,7 @@ GridLayout {
         Layout.preferredWidth: Tokens.sizes.dashboard.weatherWidth
         Layout.preferredHeight: weather.implicitHeight
 
-        radius: Tokens.rounding.extraLarge * 1.5
+        radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
 
         SmallWeather {
             id: weather
@@ -49,7 +49,7 @@ GridLayout {
         Layout.preferredWidth: dateTime.implicitWidth
         Layout.fillHeight: true
 
-        radius: Tokens.rounding.large
+        radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
 
         DateTime {
             id: dateTime
@@ -63,7 +63,7 @@ GridLayout {
         Layout.fillWidth: true
         Layout.preferredHeight: calendar.implicitHeight
 
-        radius: Tokens.rounding.extraLarge
+        radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
 
         Calendar {
             id: calendar
@@ -78,7 +78,7 @@ GridLayout {
         Layout.preferredWidth: resources.implicitWidth
         Layout.fillHeight: true
 
-        radius: Tokens.rounding.large
+        radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
 
         Resources {
             id: resources
@@ -92,7 +92,7 @@ GridLayout {
         Layout.preferredWidth: media.implicitWidth
         Layout.fillHeight: true
 
-        radius: Tokens.rounding.extraLarge * 2
+        radius: 0 // nosignal: square dashboard cards to match the redesign (F-D1)
 
         Media {
             id: media
