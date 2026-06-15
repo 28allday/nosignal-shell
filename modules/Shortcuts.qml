@@ -54,8 +54,9 @@ Scope {
         onPressed: {
             if (root.hasFullscreen)
                 return;
-            const visibilities = Visibilities.getForActive();
-            visibilities.session = !visibilities.session;
+            // NoSignal: drive the redesigned full-screen Power Menu (NsOverlay),
+            // not the old caelestia session panel (now dead code).
+            NsShell.toggle("power", 0);
         }
     }
 

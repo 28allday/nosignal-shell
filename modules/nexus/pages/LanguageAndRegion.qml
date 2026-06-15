@@ -92,41 +92,71 @@ PageBase {
             text: qsTr("Weather")
         }
 
-        // Placeholder until the map-based location picker lands
+        // Location for the weather service. Weather.qml accepts a city name
+        // (geocoded) or a "lat,lon" string, and auto-detects via IP when empty.
         ConnectedRect {
             Layout.fillWidth: true
             first: true
             last: true
-            implicitHeight: comingSoon.implicitHeight + Tokens.padding.extraLarge * 2
+            implicitHeight: weatherLayout.implicitHeight + weatherLayout.anchors.margins * 2
 
             ColumnLayout {
-                id: comingSoon
+                id: weatherLayout
 
-                anchors.centerIn: parent
-                width: parent.width - Tokens.padding.largeIncreased * 2
-                spacing: Tokens.padding.extraSmall
-
-                NsIcon {
-                    Layout.alignment: Qt.AlignHCenter
-                    icon: "map"
-                    color: Colours.palette.m3outlineVariant
-                    fontStyle: Tokens.font.icon.extraLarge
-                }
+                anchors.fill: parent
+                anchors.margins: Tokens.padding.medium
+                anchors.leftMargin: Tokens.padding.largeIncreased
+                anchors.rightMargin: Tokens.padding.largeIncreased
+                spacing: Tokens.spacing.small
 
                 StyledText {
-                    Layout.alignment: Qt.AlignHCenter
-                    text: qsTr("Location picker coming soon")
-                    color: Colours.palette.m3outlineVariant
-                    font: Tokens.font.title.small
+                    Layout.fillWidth: true
+                    text: qsTr("Location")
+                    font: Tokens.font.body.small
+                    elide: Text.ElideRight
+                }
+
+                StyledRect {
+                    Layout.fillWidth: true
+                    implicitHeight: locField.implicitHeight + Tokens.padding.medium * 2
+
+                    radius: Tokens.rounding.small
+                    color: Colours.tPalette.m3surfaceContainerLowest
+                    border.color: Colours.palette.m3outlineVariant
+
+                    Behavior on border.color {
+                        CAnim {}
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.IBeamCursor
+                        onClicked: locField.focus = true
+                    }
+
+                    StyledTextField {
+                        id: locField
+
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.leftMargin: Tokens.padding.large
+                        anchors.rightMargin: Tokens.padding.large
+
+                        text: GlobalConfig.services.weatherLocation
+                        placeholderText: qsTr("City name or lat,long — empty = auto (IP)")
+                        placeholderTextColor: Colours.palette.m3onSurfaceVariant
+                        color: Colours.palette.m3onSurface
+                        onEditingFinished: GlobalConfig.services.weatherLocation = text
+                    }
                 }
 
                 StyledText {
                     Layout.fillWidth: true
-                    horizontalAlignment: Text.AlignHCenter
                     wrapMode: Text.WordWrap
-                    text: qsTr("Choose your weather location on a map in a future update")
-                    color: Colours.palette.m3outlineVariant
-                    font: Tokens.font.body.small
+                    text: qsTr("Leave empty to detect your location automatically.")
+                    color: Colours.palette.m3outline
+                    font: Tokens.font.label.small
                 }
             }
         }

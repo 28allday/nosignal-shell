@@ -2,8 +2,8 @@ pragma Singleton
 pragma ComponentBehavior: Bound
 
 // NoSignal icon remap: Material Symbol name -> Nerd Font (JetBrainsMono NF)
-// codepoint (Font Awesome range), via String.fromCharCode so the source stays
-// pure ASCII. Used by components/NsIcon. Covers bar/panel icons + the dynamic
+// codepoint (Font Awesome + MDI ranges), via String.fromCodePoint so the source
+// stays pure ASCII. Used by components/NsIcon. Covers bar/panel icons + the dynamic
 // Icons.getX() returns. get() falls back to a question glyph so anything
 // unmapped is visible (easy to spot + add a mapping).
 
@@ -14,7 +14,9 @@ Singleton {
     id: root
 
     function cp(code: int): string {
-        return String.fromCharCode(code);
+        // fromCodePoint (not fromCharCode) so astral-plane glyphs (Nerd Font
+        // MDI range, > 0xFFFF) emit correct surrogate pairs, not truncated.
+        return String.fromCodePoint(code);
     }
 
     readonly property var map: {
@@ -232,7 +234,20 @@ Singleton {
         "stop": root.cp(0xf04d),
         "thermostat": root.cp(0xf2c9),
         "water_drop": root.cp(0xf043),
-        "wb_twilight": root.cp(0xf185)
+        "wb_twilight": root.cp(0xf185),
+        // additions-page icons (nexus Additional Software)
+        "brush": root.cp(0xf1fc),          // fa-paintbrush
+        "cloud_sync": root.cp(0xf063f),    // md-cloud_sync
+        "data_object": root.cp(0xf0169),   // md-code_braces
+        "deployed_code": root.cp(0xf1b2),  // fa-cube
+        "movie_edit": root.cp(0xf008),     // fa-film
+        "neurology": root.cp(0xee9c),      // fa-brain
+        "psychology": root.cp(0xf133c),    // md-head_cog
+        "robot_2": root.cp(0xee0d),        // fa-robot
+        "smart_toy": root.cp(0xf06a9),     // md-robot
+        "sports_esports": root.cp(0xf11b), // fa-gamepad
+        "videocam": root.cp(0xf03d),       // fa-video_camera
+        "vpn_lock": root.cp(0xf099d)       // md-shield_lock
     }
 
     function get(name: string): string {
