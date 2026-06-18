@@ -3,10 +3,13 @@ pragma ComponentBehavior: Bound
 // NoSignal Quick Settings popout (off the media / battery pill). Avatar + user +
 // uptime + power button; 2-col toggle grid; brightness + volume sliders; media
 // card. Wired to the real services (Network, Bluetooth, Notifs, Audio,
-// Brightness, Players); Night Light / Airplane / VPN are stateful toggles for now.
+// Brightness, Players). Night Light drives hyprsunset; Airplane drives the
+// NetworkManager + Bluetooth radios. (VPN tile removed pending a real backend.)
 
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
+import Quickshell.Io
 import Quickshell.Bluetooth
 import qs.services
 import qs.utils
@@ -19,6 +22,35 @@ NsPanel {
     anchorMode: "right"
 
     readonly property var brightMon: Brightness.monitors[0] ?? null
+
+    // Night Light state tracks the real hyprsunset process rather than a local
+    // flag, so the tile stays correct across shell reloads or changes made
+    // elsewhere. Seeded on load (probe runs immediately), reconciled on a timer,
+    // and re-checked right after a toggle.
+    property bool nightLightOn: false
+
+    Process {
+        id: nightProbe
+        command: ["pgrep", "-x", "hyprsunset"]
+        running: true
+        stdout: StdioCollector {
+            onStreamFinished: root.nightLightOn = text.trim().length > 0
+        }
+    }
+
+    Timer {
+        interval: 3000
+        running: true
+        repeat: true
+        onTriggered: nightProbe.running = true
+    }
+
+    Timer {
+        id: nightRefresh
+        interval: 500
+        repeat: false
+        onTriggered: nightProbe.running = true
+    }
 
     // ── Header ───────────────────────────────────────────────────────────
     RowLayout {
@@ -128,21 +160,31 @@ NsPanel {
             icon: "nightlight"
             label: "Night Light"
             sub: on ? "Warm 3500K" : "Off"
-            onToggled: on = !on
+            on: root.nightLightOn
+            onToggled: {
+                if (root.nightLightOn)
+                    Quickshell.execDetached(["pkill", "-x", "hyprsunset"]);
+                else
+                    Quickshell.execDetached(["sh", "-c", "pkill -x hyprsunset; hyprsunset -t 3500"]);
+                nightRefresh.restart();
+            }
         }
         QSToggle {
             id: airTog
             icon: "airplanemode_active"
             label: "Airplane"
-            sub: on ? "On" : "Off"
-            onToggled: on = !on
-        }
-        QSToggle {
-            id: vpnTog
-            icon: "vpn_key"
-            label: "VPN"
-            sub: on ? "On" : "Off"
-            onToggled: on = !on
+            // Reflects the real radio state: airplane is "On" when both Wi-Fi and
+            // Bluetooth are down. Network.wifiEnabled tracks nmcli; the adapter
+            // tracks BlueZ, so the tile self-corrects if radios change elsewhere.
+            readonly property bool radiosOff: !Network.wifiEnabled && !(Bluetooth.defaultAdapter?.enabled ?? false)
+            sub: radiosOff ? "On" : "Off"
+            on: radiosOff
+            onToggled: {
+                if (radiosOff)
+                    Quickshell.execDetached(["sh", "-c", "nmcli radio all on; bluetoothctl power on"]);
+                else
+                    Quickshell.execDetached(["sh", "-c", "nmcli radio all off; bluetoothctl power off"]);
+            }
         }
     }
 

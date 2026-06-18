@@ -216,6 +216,11 @@ PageBase {
             Layout.fillWidth: true
         }
 
+        // NoSignal: CachyOS repos enable/disable (sudoless, auto-tier)
+        CachyRepoToggleRow {
+            Layout.fillWidth: true
+        }
+
         SelectRow {
             Layout.fillWidth: true
             last: true
