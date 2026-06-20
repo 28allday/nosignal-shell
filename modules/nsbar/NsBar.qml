@@ -79,7 +79,7 @@ Variants {
                 id: titlePill
 
                 active: NsShell.open === "overview"
-                onTriggered: NsShell.toggle("overview", mapToItem(null, width / 2, 0).x)
+                onTriggered: NsShell.toggle("overview", mapToItem(null, width / 2, 0).x, win.modelData.name)
 
                 NsIcon {
                     icon: "desktop_windows"
@@ -104,7 +104,7 @@ Variants {
 
             anchors.centerIn: parent
             active: NsShell.open === "calendar"
-            onTriggered: NsShell.toggle("calendar", mapToItem(null, width / 2, 0).x)
+            onTriggered: NsShell.toggle("calendar", mapToItem(null, width / 2, 0).x, win.modelData.name)
 
             BC.Clock {}
         }
@@ -122,7 +122,7 @@ Variants {
 
                 visible: Players.active !== null
                 active: NsShell.open === "quicksettings"
-                onTriggered: NsShell.toggle("quicksettings", mapToItem(null, width / 2, 0).x)
+                onTriggered: NsShell.toggle("quicksettings", mapToItem(null, width / 2, 0).x, win.modelData.name)
 
                 NsIcon {
                     icon: Players.active?.isPlaying ? "pause" : "music_note"
@@ -153,7 +153,7 @@ Variants {
                 id: bellPill
 
                 active: NsShell.open === "notifications"
-                onTriggered: NsShell.toggle("notifications", mapToItem(null, width / 2, 0).x)
+                onTriggered: NsShell.toggle("notifications", mapToItem(null, width / 2, 0).x, win.modelData.name)
 
                 NsIcon {
                     icon: Notifs.notClosed.length > 0 ? "notifications" : "notifications_none"
@@ -204,7 +204,7 @@ Variants {
 
                 readonly property bool laptop: UPower.displayDevice.isLaptopBattery
                 active: NsShell.open === "quicksettings"
-                onTriggered: NsShell.toggle("quicksettings", mapToItem(null, width / 2, 0).x)
+                onTriggered: NsShell.toggle("quicksettings", mapToItem(null, width / 2, 0).x, win.modelData.name)
 
                 NsIcon {
                     icon: batteryPill.laptop ? Icons.getBatteryIcon(UPower.displayDevice.percentage, [UPowerDeviceState.Charging, UPowerDeviceState.FullyCharged, UPowerDeviceState.PendingCharge].includes(UPower.displayDevice.state)) : "tune"
@@ -249,7 +249,7 @@ Variants {
             property color iconColour: Theme.text
 
             active: NsShell.open === panel
-            onTriggered: NsShell.toggle(panel, mapToItem(null, width / 2, 0).x)
+            onTriggered: NsShell.toggle(panel, mapToItem(null, width / 2, 0).x, win.modelData.name)
 
             NsIcon {
                 icon: p.icon

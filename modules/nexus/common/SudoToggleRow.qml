@@ -46,7 +46,14 @@ ToggleRow {
     // --- actions --------------------------------------------------------------
     Process {
         id: enableProc
-        command: ["kitty", "--class", "TUI.float", "-e", "sudo", "nosignal-sudo-toggle", "enable"]
+        // Dedicated window class (nosignal-sudo) so the shipped hypr windowrules
+        // (float/center/pin/stayfocused) force this prompt to GRAB keyboard focus.
+        // With the shared TUI.float class and no focus rule the prompt did not get
+        // keystrokes -> three blank tries tripped pam_faillock and the switch just
+        // snapped back with no feedback (hardware bug 2026-06-20). `enable-tui`
+        // runs the sudo prompt as the user and keeps the terminal open on failure
+        // so the reason is visible instead of vanishing.
+        command: ["kitty", "--class", "nosignal-sudo", "-e", "nosignal-sudo-toggle", "enable-tui"]
     }
     Process {
         id: disableProc

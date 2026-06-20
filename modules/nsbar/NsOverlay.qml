@@ -19,8 +19,13 @@ Variants {
 
         required property ShellScreen modelData
 
+        // This overlay owns the panel only when NsShell.screen names this output
+        // (or is "" = unscoped, e.g. the global power modal → show on all screens).
+        // Without this, every screen's overlay rendered the panel → mirrored popups.
+        readonly property bool onThisScreen: NsShell.screen === "" || NsShell.screen === modelData.name
+
         screen: modelData
-        visible: NsShell.open !== ""
+        visible: NsShell.open !== "" && ov.onThisScreen
         color: "transparent"
         WlrLayershell.namespace: "nspanels"
         WlrLayershell.layer: WlrLayer.Overlay
@@ -48,7 +53,7 @@ Variants {
         // full-screen modal: Power Menu
         Loader {
             anchors.fill: parent
-            active: NsShell.open === "power"
+            active: NsShell.open === "power" && ov.onThisScreen
             sourceComponent: powerC
 
             Component {
@@ -61,7 +66,7 @@ Variants {
         Loader {
             id: loader
 
-            active: NsShell.open !== "" && NsShell.open !== "power"
+            active: NsShell.open !== "" && NsShell.open !== "power" && ov.onThisScreen
             y: Theme.size.barHeight + 6
             x: {
                 if (!item)
