@@ -22,10 +22,13 @@ ToggleRow {
         : qsTr("Run sudo without a password for 15 minutes, then it reverts")
 
     onToggled: {
-        if (checked)
+        if (checked) {
             enableProc.running = true;   // needs a password -> floating terminal
-        else
+            focusTimer.ticks = 0;
+            focusTimer.restart();        // then pull keyboard focus to the prompt
+        } else {
             disableProc.running = true;  // no password inside the active window
+        }
         reconcile.restart();
     }
 
@@ -58,6 +61,29 @@ ToggleRow {
     Process {
         id: disableProc
         command: ["sudo", "-n", "nosignal-sudo-toggle", "disable"]
+    }
+    // Force keyboard focus onto the password prompt once it has mapped. Hyprland
+    // 0.55's match: windowrule grammar has no working `stayfocused`, so we
+    // "activate it" from here instead (the prompt uses the dedicated nosignal-sudo
+    // class). Two nudges cover slow terminal startup.
+    Process {
+        id: focusProc
+        command: ["hyprctl", "dispatch", "focuswindow", "class:^(nosignal-sudo)$"]
+    }
+    Timer {
+        id: focusTimer
+        interval: 400
+        repeat: true
+        triggeredOnStart: false
+        property int ticks: 0
+        onTriggered: {
+            focusProc.running = true;
+            ticks += 1;
+            if (ticks >= 3) {
+                ticks = 0;
+                stop();
+            }
+        }
     }
 
     // --- polling --------------------------------------------------------------
