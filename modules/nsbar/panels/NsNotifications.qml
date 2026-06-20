@@ -71,8 +71,16 @@ NsPanel {
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
                 onClicked: {
-                    for (const n of Notifs.notClosed)
-                        n.notification?.dismiss();
+                    // Mirror the service's own clear() / clearNotifs shortcut:
+                    // NotifData.close() sets `closed` (drops it from notClosed so the
+                    // card disappears), removes it from Notifs.list, dismisses the
+                    // server notification and destroys it. Calling
+                    // `notification?.dismiss()` directly cleared nothing — it never
+                    // touched the list, and is a no-op for notifications restored from
+                    // disk (their `notification` is null). Iterate a slice() copy so
+                    // mutating the list mid-loop is safe.
+                    for (const n of Notifs.list.slice())
+                        n.close();
                 }
             }
         }

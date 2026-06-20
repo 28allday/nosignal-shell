@@ -2,6 +2,8 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
+import Quickshell.Io
 import Quickshell.Bluetooth
 import Caelestia.Components
 import Caelestia.Config
@@ -17,6 +19,18 @@ StyledRect {
     required property DrawerVisibilities visibilities
     required property BarPopouts.Wrapper popouts
 
+    // NoSignal: the gamepad "Game Mode" toggle launches DeckShift gaming. Hide it
+    // entirely when DeckShift isn't installed (no gamescope session file) — checked
+    // once at load by deckshiftProbe below.
+    property bool deckshiftInstalled: false
+
+    Process {
+        id: deckshiftProbe
+        running: true
+        command: ["test", "-f", "/usr/share/wayland-sessions/gamescope-session-steam-nm.desktop"]
+        onExited: (exitCode, exitStatus) => root.deckshiftInstalled = exitCode === 0
+    }
+
     readonly property var quickToggles: {
         const seenIds = new Set();
 
@@ -30,6 +44,11 @@ StyledRect {
 
             if (item.id === "vpn") {
                 return GlobalConfig.utilities.vpn.provider.some(p => typeof p === "object" ? (p.enabled === true) : false);
+            }
+
+            // NoSignal: drop the Game Mode tile unless DeckShift is installed.
+            if (item.id === "gameMode") {
+                return root.deckshiftInstalled;
             }
 
             seenIds.add(item.id);
@@ -126,9 +145,33 @@ StyledRect {
                 DelegateChoice {
                     roleValue: "gameMode"
                     delegate: Toggle {
+                        id: gmTog
+                        // NoSignal: launch the DeckShift gaming session if installed;
+                        // otherwise do nothing. (Was caelestia's cosmetic Game Mode.)
+                        // Kept styled as an off-toggle (muted, outline icon) — the
+                        // gamepad is a momentary LAUNCHER, not a stateful toggle.
+                        // DEBOUNCED: a fast double-click must not fire two
+                        // `switch-to-gaming` runs — two SDDM restarts race the
+                        // one-shot autologin and drop you at the password greeter.
+                        // Guard mirrors the Super+Shift+S bind + the deckshift-login
+                        // install-check, so it no-ops if DeckShift is absent.
+                        property bool launching: false
                         icon: "gamepad"
-                        checked: GameMode.enabled
-                        onClicked: GameMode.enabled = !GameMode.enabled
+                        disabled: launching
+                        onClicked: {
+                            if (gmTog.launching)
+                                return;
+                            gmTog.launching = true;
+                            gmTog.internalChecked = false; // don't latch "on"
+                            relockTimer.start();
+                            Quickshell.execDetached(["sh", "-c", "[ -x /usr/local/bin/switch-to-gaming ] && [ -f /usr/share/wayland-sessions/gamescope-session-steam-nm.desktop ] && exec /usr/local/bin/switch-to-gaming"]);
+                        }
+
+                        Timer {
+                            id: relockTimer
+                            interval: 5000
+                            onTriggered: gmTog.launching = false
+                        }
                     }
                 }
                 DelegateChoice {
